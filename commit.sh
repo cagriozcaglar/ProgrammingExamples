@@ -1,4 +1,4 @@
-git add .
+git add --all .
 git commit -m "$1"
 randomText="origin`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 6`"
 git remote add ${randomText} https://github.com/cagriozcaglar/ProgrammingExamples.git
