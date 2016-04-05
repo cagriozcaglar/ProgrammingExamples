@@ -66,7 +66,7 @@ public class threeSum
 		    Integer secondIndex = sumPairIndices.getValue();
 		    if(firstIndex != i && secondIndex != i)
 		    {
-			threeSum = new int[]{A[firstIndex], A[secondIndex], -A[i]};
+			threeSum = new int[]{A[firstIndex], A[secondIndex], A[i]};
 			return threeSum;
 		    }
 		}
@@ -85,7 +85,7 @@ public class threeSum
 	System.out.println("A three-element subset of array that sum up to zero: " + Arrays.toString(threeSum));
 	/* Output:
 	   [3, 2, -4, 6, 7, -8]
-	   A three-element subset of array that sum up to zero: [6, -8, -2]
+	   A three-element subset of array that sum up to zero: [6, -8, 2]
 	*/
 
 	// Second test
