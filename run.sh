@@ -1,1 +1,1 @@
-./commit.sh "Added the 3-sum question."
+./commit.sh "Moved ThreeSum question to Arrays section."
