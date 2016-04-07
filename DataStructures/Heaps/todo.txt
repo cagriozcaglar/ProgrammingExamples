@@ -1,0 +1,5 @@
+Median of data / integer stream
+Find a permutation of a string such that no same character are next to each other
+Merge k sorted arrays
+Sort a nearly sorted (k-sorted) array
+Find k largest/smallest elments in an array

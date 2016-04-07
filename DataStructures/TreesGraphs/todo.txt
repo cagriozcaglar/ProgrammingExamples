@@ -1,0 +1,19 @@
+DFS
+BFS
+Topological sort
+Balanced trees
+Red-black trees
+AVL trees
+k-d trees
+Interval trees
+B+ trees
+trie
+suffix tree
+Graphs with different representations: Adjacency list, set of vertices and edges, disjoint set.
+Union-find / disjoint set data structure for graph representation
+Basic graph algorithms:
+  -- Get connected components / strongly connected components
+  -- Find if there is a path between two nodes
+Find all paths in a tree that sum up to a value
+Check if a tree is a subtree of another tree
+Lowest common ancestor in a tree, if the tree is: a) a binary tree, b) a binary search tree.
