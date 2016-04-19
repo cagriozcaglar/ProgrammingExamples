@@ -1,0 +1,2 @@
+Implement in C++: Example code: http://codercareer.blogspot.com/2012/01/no-30-median-in-stream.html
+Implement in Java: Example code: https://gist.github.com/Vedrana/3675434

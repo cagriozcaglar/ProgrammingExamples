@@ -1,1 +1,1 @@
-./commit.sh "Implemented the solution to median of integer stream question in Python."
+./commit.sh "Added new data structures to data structure section."
