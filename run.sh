@@ -1,1 +1,1 @@
-./commit.sh "Added new data structures to data structure section."
+./commit.sh "Added syntax examples for arrays, vectors, strings."
