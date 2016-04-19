@@ -1,9 +1,21 @@
 Sections:
-SortingSearching
+
+SortingSearching:
+ - Regular sorting algorithms: Insertion sort, Merge sort, Quick sort, Bubble sort, Bucket sort, Selection sort
+ - Sorting a k-sorted array: Heap sort
+ - Select k largest / smallest elements
 
 Recursion
+ - Print permutations
+ - Print combinations
+ - Make coin change
+ - Tree/Graph algorithms
 
 DynamicProgramming
+ - Longest Common Subsequence
+ - Knapsack problem
 
 GreedyAlgorithms
-
+ - Huffman Coding
+ - Knapsack problem (check which variant)
+ - Largest rectangle under skyline

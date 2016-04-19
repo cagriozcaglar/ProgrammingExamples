@@ -1,1 +1,1 @@
-./commit.sh "Added syntax examples for arrays, vectors, strings."
+./commit.sh "Added more items to do in Algorithms section."
