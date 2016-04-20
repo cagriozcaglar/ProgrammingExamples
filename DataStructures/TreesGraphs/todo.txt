@@ -1,4 +1,4 @@
-DFS
++ DFS 
 BFS
 Topological sort
 Balanced trees
@@ -14,6 +14,7 @@ Union-find / disjoint set data structure for graph representation
 Basic graph algorithms:
   -- Get connected components / strongly connected components
   -- Find if there is a path between two nodes
+Check BST property
 Find all paths in a tree that sum up to a value
 Check if a tree is a subtree of another tree
 Lowest common ancestor in a tree, if the tree is: a) a binary tree, b) a binary search tree.

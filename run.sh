@@ -1,1 +1,1 @@
-./commit.sh "Added more items to do in Algorithms section."
+./commit.sh "Added examples for hash table, hash map, hash set syntax in Java."
