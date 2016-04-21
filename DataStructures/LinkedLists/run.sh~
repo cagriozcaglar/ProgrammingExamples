@@ -1,0 +1,7 @@
+# Java
+javac linkedListExample.java
+java linkedListExample
+
+# C++
+# g++ intervalSetIntersection.cpp -o intervalSetIntersection
+# ./intervalSetIntersection

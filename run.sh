@@ -1,1 +1,1 @@
-./commit.sh "Added examples for hash table, hash map, hash set syntax in Java."
+./commit.sh "Added syntax examples for linked lists, stacks, queues."
