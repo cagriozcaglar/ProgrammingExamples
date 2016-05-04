@@ -4,6 +4,7 @@ public class javaHeapExample2
 {
     public static void main(String[] args)
     {
+        System.out.println("Java Heap Example 2 starts");
 	PriorityQueue<Request> queue = new PriorityQueue<>();
 	queue.offer(new Request("ABC", 2));
 	queue.offer(new Request("ABC", 5));
@@ -12,6 +13,8 @@ public class javaHeapExample2
 	{
 	    System.out.println(queue.poll());
 	}
+
+        System.out.println("Java Heap Example 2 ends");
     }
     /* Output:
        Request [requestName= ABC, priorityStatus=1]

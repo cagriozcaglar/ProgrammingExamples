@@ -1,1 +1,1 @@
-./commit.sh "Added syntax examples for linked lists, stacks, queues."
+./commit.sh "Added new to-do items."

@@ -14,6 +14,9 @@ Recursion
 DynamicProgramming
  - Longest Common Subsequence
  - Knapsack problem
+ - Balanced Array Partition: Partition an array of integer into two groups such that the difference of sums are minimum: 
+    -- http://algorithmsandme.in/2014/04/balanced-partition-problem
+    -- https://people.cs.clemson.edu/~bcdean/dp_practice/dp_4.swf
 
 GreedyAlgorithms
  - Huffman Coding

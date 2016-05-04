@@ -1,5 +1,6 @@
 import heapq
 
+print("Python Heap Example starts")
 # Initialize a heap (always a min-heap in Python) as a list
 theHeap = []
 
@@ -87,3 +88,4 @@ print(largestElements)
 '''
 [9, 8, 7]
 '''
+print("Python Heap Example ends")

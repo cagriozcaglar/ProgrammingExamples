@@ -5,6 +5,7 @@ public class javaHeapExample
 {
     public static void main(String[] args)
     {
+	System.out.println("Java Heap Example 1 starts");
 	Comparator<String> comparator = new StringLengthComparator();
 	PriorityQueue<String> queue = new PriorityQueue<String>(10, comparator);
 	queue.add("short");
@@ -14,6 +15,7 @@ public class javaHeapExample
 	{
 	    System.out.println(queue.remove());
 	}
+	System.out.println("Java Heap Example 1 ends\n");
     }
 }
 

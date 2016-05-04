@@ -1,1 +1,7 @@
 -- Dutch National Flag problem
+-- Maximum Subarray Sum: Find subarray with maximum sum: http://www.programcreek.com/2013/02/leetcode-maximum-subarray-java/
+-- Maximum Subarray Product: Find subarray with maximum product: http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/
+-- Rotate an array in linear time (O(n)) and constant space O(1)
+  -- http://stackoverflow.com/questions/4457277/algorithm-to-rotate-an-array-in-linear-time
+  -- http://www.programcreek.com/2015/03/rotate-array-in-java
+
