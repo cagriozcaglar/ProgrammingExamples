@@ -1,1 +1,1 @@
-./commit.sh "Moving the project to MacBook: 11/24/2016."
+./commit.sh "Tested all platforms in Mac OS: Java, C++, Python, C#. Fixed OS compatibility issues for C# regarding by switching gmcs to mcs."

@@ -10,5 +10,5 @@ g++ testCplusplus.cpp -o testCpp
 ./testCpp
 
 # C#
-gmcs testCsharp.cs
+mcs testCsharp.cs
 mono testCsharp.exe
