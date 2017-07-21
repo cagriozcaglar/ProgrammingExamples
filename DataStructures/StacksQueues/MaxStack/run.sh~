@@ -1,3 +1,4 @@
-# Java                                                                                                                                  javjavac stackQueueExample.java
-java stackQueueExample
+# Java
+javac MaxStack.java
+java MaxStack
 
