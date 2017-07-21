@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/ArraysVectorsStrings/ArraysVectorsStrings.iml" filepath="$PROJECT_DIR$/DataStructures/ArraysVectorsStrings/ArraysVectorsStrings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/DataStructures.iml" filepath="$PROJECT_DIR$/DataStructures/DataStructures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/HashMapsTablesSets/HashMapsTablesSets.iml" filepath="$PROJECT_DIR$/DataStructures/HashMapsTablesSets/HashMapsTablesSets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/Heaps/Heaps.iml" filepath="$PROJECT_DIR$/DataStructures/Heaps/Heaps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProgrammingExamples.iml" filepath="$PROJECT_DIR$/ProgrammingExamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/StacksQueues/StacksQueues.iml" filepath="$PROJECT_DIR$/DataStructures/StacksQueues/StacksQueues.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UnclassifiedQuestions/UnclassifiedQuestions.iml" filepath="$PROJECT_DIR$/UnclassifiedQuestions/UnclassifiedQuestions.iml" />
+    </modules>
+  </component>
+</project>

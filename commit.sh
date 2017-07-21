@@ -1,3 +1,4 @@
+# git config --system core.editor emacs
 git add --all .
 git commit -m "$1"
 randomText="origin`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 6`"
