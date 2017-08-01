@@ -1,3 +1,3 @@
 # Java
-javac MaxStack.java
-java MaxStack
+javac BalancedBrackets.java
+java BalancedBrackets
