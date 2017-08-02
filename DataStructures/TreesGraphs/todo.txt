@@ -1,4 +1,4 @@
-+ DFS 
+DFS 
 BFS
 Topological sort
 Balanced trees
