@@ -13,12 +13,11 @@ Given n = 5 and edges = [ [0,1], [1,2], [3,4] ]. the number of connected compone
 """
 Solution with disjoint set
 """
-
 class connectedComponents:
     """
     Constructor for connectedComponents class
     @param: n - number of nodes in the graph
-    It also initializes the parents to [0, .., (n-1)] and number of connected components to n
+    It also initializes the parents to [0,...,(n-1)] and number of connected components to n
     """
     def __init__(self, n):
         # Rank of all nodes: How many steps does it talke to get to the parent node in the disjoint set
@@ -34,9 +33,7 @@ class connectedComponents:
     """
     def getParent(self, v):
         while self.parent[v] != v:
-            v = self.parent[v];
-            #self.parent[v] = self.getParent(v)
-            #self.parent[v] = self.getParent(self.parent[v])
+            v = self.parent[v]
         return self.parent[v]
 
     """
@@ -53,6 +50,7 @@ class connectedComponents:
             if p1 == p2:
                 continue
             # If nodes do not have the same parent, meaning they are not in the same connected component
+            # Set the parent of lower-ranked node to be the higher-ranked node, in order to reduce total height
             else:
                 if self.rank[p1] > self.rank[p2]:
                     self.parent[p2] = p1
