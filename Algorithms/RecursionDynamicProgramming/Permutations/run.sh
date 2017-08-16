@@ -5,3 +5,6 @@
 # C++
 g++ Permutations.cpp -o Permutations
 ./Permutations
+
+# Python
+python Permutations.py
