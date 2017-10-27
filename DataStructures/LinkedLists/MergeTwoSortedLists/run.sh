@@ -1,0 +1,2 @@
+javac MergeTwoSortedLists.java
+java MergeTwoSortedLists
