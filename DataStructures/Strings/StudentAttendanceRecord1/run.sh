@@ -1,0 +1,3 @@
+javac StudentAttendanceRecord1.java
+java StudentAttendanceRecord1
+
