@@ -1,0 +1,2 @@
+javac LowestCommonAncestorOfBinarySearchTree.java
+java LowestCommonAncestorOfBinarySearchTree
