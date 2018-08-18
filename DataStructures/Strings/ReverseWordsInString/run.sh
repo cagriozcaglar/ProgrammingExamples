@@ -1,2 +1,0 @@
-javac ReverseWordsInString.java
-java ReverseWordsInString

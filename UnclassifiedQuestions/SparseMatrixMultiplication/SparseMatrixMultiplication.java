@@ -321,8 +321,8 @@ public class SparseMatrixMultiplication {
         int[][] A = new int[][] { { 1, 0, 0},
                                   {-1, 0, 3} };
         int[][] B = new int[][] { { 7, 0, 0 },
-                                    { 0, 0, 0 },
-                                    { 0, 0, 1 } };
+                                  { 0, 0, 0 },
+                                  { 0, 0, 1 } };
         runTestCase(A, B);
     }
 }

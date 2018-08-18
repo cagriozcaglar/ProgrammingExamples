@@ -1,5 +1,5 @@
 /**
- * Design a data structure that supports the following two operations:
+ Design a data structure that supports the following two operations:
 
  void addWord(word)
  bool search(word)
@@ -23,7 +23,12 @@ public class WordDictionary {
 
     // Example Solution 1: https://www.programcreek.com/2014/05/leetcode-add-and-search-word-data-structure-design-java/
     // Example Solution 2: https://github.com/tongzhang1994/Facebook-Interview-Coding/blob/master/211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design.java
-    class TrieNode {
+
+    /**
+     * Internal TrieNode class
+     * It has to be <>static</>, because it is used in a static method later (<>public static void main</>).
+     */
+    static class TrieNode {
         TrieNode[] links;
         boolean isLeaf;
 
@@ -33,15 +38,17 @@ public class WordDictionary {
     }
 
     // WordDictionary class member
-    TrieNode root;
+    static TrieNode root;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public WordDictionary() {
         root = new TrieNode();
     }
 
     /** Adds a word into the data structure. */
-    public void addWord(String word) {
+    public static void addWord(String word) {
         TrieNode node = root;
 
         // Iterate over characters of the string
@@ -57,14 +64,22 @@ public class WordDictionary {
         node.isLeaf = true;
     }
 
-    /** Returns if the word is in the data structure.
-     *  A word could contain the dot character '.' to represent any one letter.
+    /**
+     * Returns if the word is in the data structure.
+     * A word could contain the dot character '.' to represent any one letter.
      */
-    public boolean search(String word) {
+    public static boolean search(String word) {
         return searchSuffix(word, 0, root);
     }
 
-    private boolean searchSuffix(String word, int start, TrieNode node) {
+    /**
+     * Search suffix, given <>String word</>, <>int start</>, <>TrieNode node</>
+     * @param word
+     * @param start
+     * @param node
+     * @return
+     */
+    private static boolean searchSuffix(String word, int start, TrieNode node) {
         // If end of the word is reached, check if the current node is a leaf node
         if(start == word.length()) {
             return node.isLeaf;
@@ -86,6 +101,17 @@ public class WordDictionary {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        WordDictionary dict = new WordDictionary();
+        dict.addWord("bad");
+        dict.addWord("dad");
+        dict.addWord("mad");
+        System.out.println(search("pad")); // -> false
+        System.out.println(search("bad")); // -> true
+        System.out.println(search(".ad")); // -> true
+        System.out.println(search("b..")); // -> true
     }
 }
 

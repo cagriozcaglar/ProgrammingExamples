@@ -66,6 +66,9 @@ import java.util.*;
 
 public class BinaryTreeVerticalOrderTraversal {
 
+    /**
+     * Internal static binary node class
+     */
     private static class Node {
         int key;
         Node left;
@@ -79,6 +82,7 @@ public class BinaryTreeVerticalOrderTraversal {
     }
 
     /**
+     * Use a TreeMap<Integer, Queue<Integer>> which maps each level to list of integers at the level
      *
      * @param root
      * @return

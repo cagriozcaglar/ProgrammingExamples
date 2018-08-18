@@ -1,20 +1,19 @@
-/*
+/**
 Given an array of integers, return three elements that sum to 0.
 If there is no such triple, return an error message.
-*/
 
-/*
 e.g. A = [3, 2, -4,  6 , 7, -8] => 2 + 6 + (-8) = 0
 */
 
-/* Design:
-// a + b = k     // 2-sum
-// Sort the array
-// Keep a pointer at the beginning and end
+/**
+  Design:
+   a + b = k     // 2-sum
+   Sort the array
+   Keep a pointer at the beginning and end
 
-// a + b + c = 0  // 3-sum 
-// a + b = -c
-// a + b = k      // Similar to 2-sum
+   a + b + c = 0  // 3-sum
+   a + b = -c
+   a + b = k      // Similar to 2-sum
 
 # Solution:
 1. Get all pairs in the array and map their sum to all possible pairs that sum to the value: O(n^2)
@@ -27,6 +26,11 @@ import java.util.*;
 // Example: Map.Entry<String, String> thePair = new AbstractMap.SimpleEntry<>("A","B");
 
 public class threeSum {
+    /**
+     *
+     * @param A
+     * @return
+     */
     public static int[] getThreeSum(int[] A) {
         HashMap<Integer, Vector<Map.Entry<Integer, Integer>>> sumToPairs = new HashMap<Integer, Vector<Map.Entry<Integer, Integer>>>();
         int sum;
@@ -66,25 +70,40 @@ public class threeSum {
         return threeSum;
     }
 
+    /**
+     * Run test cases
+     * @param numbers
+     */
+    public static void runTestCases(int[] numbers) {
+        System.out.println("A three-element subset of array " + Arrays.toString(numbers)
+                            + " that sum up to zero: " + Arrays.toString(getThreeSum(numbers)));
+    }
+
     public static void main(String[] args) {
         // First test
         int[] integerArray = new int[]{3, 2, -4, 6, 7, -8};
+        runTestCases(integerArray);
+/*
         System.out.println(Arrays.toString(integerArray));
         int[] threeSum = getThreeSum(integerArray);
         System.out.println("A three-element subset of array that sum up to zero: " + Arrays.toString(threeSum));
-    /* Output:
-	   [3, 2, -4, 6, 7, -8]
-	   A three-element subset of array that sum up to zero: [6, -8, 2]
-	*/
+*/
+        /* Output:
+           [3, 2, -4, 6, 7, -8]
+           A three-element subset of array that sum up to zero: [6, -8, 2]
+        */
 
         // Second test
         int[] integerArray2 = new int[]{3, 2, -4, 6, 7};
+        runTestCases(integerArray2);
+/*
         System.out.println(Arrays.toString(integerArray2));
         int[] threeSum2 = getThreeSum(integerArray2);
         System.out.println("A three-element subset of array that sum up to zero: " + Arrays.toString(threeSum2));
-	/*
-	  [3, 2, -4, 6, 7]
-	  A three-element subset of array that sum up to zero: []
-	*/
+*/
+        /*
+          [3, 2, -4, 6, 7]
+          A three-element subset of array that sum up to zero: []
+        */
     }
 }

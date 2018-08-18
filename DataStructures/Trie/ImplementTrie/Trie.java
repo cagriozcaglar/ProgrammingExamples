@@ -4,6 +4,10 @@
  */
 public class Trie {
 
+    /**
+     * Internal TrieNode class
+     * It has to be <>static</>, because it will be used in static methods.
+     */
     class TrieNode {
         // Links to TrieNode of all possible characters
         private TrieNode[] links;
@@ -58,12 +62,16 @@ public class Trie {
     // Root node of Trie
     private TrieNode root;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize Trie data structure
+     */
     public Trie() {
         root = new TrieNode();
     }
 
-    /** Inserts a word into the trie. */
+    /**
+     * Insert a word into the trie
+     */
     public void insert(String word) {
         TrieNode node = root;
         // Iterate over all characters of the string, and update next character based on links.
@@ -96,24 +104,45 @@ public class Trie {
         return node;
     }
 
-
-    /** Returns if the word is in the trie. */
+    /**
+     * Returns if the word is in the trie.
+     */
     public boolean search(String word) {
         TrieNode node = searchPrefix(word);
         return (node != null) && (node.isEnd());
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
     public boolean startsWith(String prefix) {
         TrieNode node = searchPrefix(prefix);
         return node != null;
     }
-}
 
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie obj = new Trie();
- * obj.insert(word);
- * boolean param_2 = obj.search(word);
- * boolean param_3 = obj.startsWith(prefix);
- */
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+
+        // Insert words
+        trie.insert("best");
+        trie.insert("test");
+        trie.insert("bat");
+        trie.insert("bath");
+        trie.insert("bad");
+        trie.insert("bed");
+        trie.insert("bedbathandbeyond");
+
+        // Test methods: search, searchPrefix, startsWith
+        System.out.println(trie.search("bed"));
+        System.out.println(trie.search("bath"));
+        System.out.println(trie.search("ba"));
+
+        // Test method: searchPrefix
+        TrieNode node = trie.searchPrefix("ba");
+        System.out.println(node != null);
+
+        // Test method: startsWith
+        System.out.println(trie.startsWith("ba"));
+        System.out.println(trie.startsWith("ate"));
+    }
+}
