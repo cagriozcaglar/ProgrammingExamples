@@ -1,0 +1,2 @@
+javac BigIntegerSorting.java
+java BigIntegerSorting

@@ -1,0 +1,2 @@
+javac SelfDividingNumber.java
+java SelfDividingNumber

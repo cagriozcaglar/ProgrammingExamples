@@ -1,0 +1,2 @@
+javac PreorderTraversal.java
+java PreorderTraversal

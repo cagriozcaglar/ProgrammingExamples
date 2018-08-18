@@ -1,0 +1,2 @@
+javac NonDecreasingArray.java
+java NonDecreasingArray

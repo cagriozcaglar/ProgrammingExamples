@@ -1,0 +1,2 @@
+javac TotalHammingDistance.java
+java TotalHammingDistance

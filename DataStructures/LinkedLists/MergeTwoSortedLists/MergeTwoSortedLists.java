@@ -68,10 +68,8 @@ public class MergeTwoSortedLists {
         while(l1 != null && l2 != null){
             runner.next = (l1.val < l2.val) ? l1 : l2;
             if(l1.val < l2.val){
-                runner.next = l1;
                 l1 = l1.next;
             } else if(l1.val >= l2.val){
-                runner.next = l2;
                 l2 = l2.next;
             }
             runner = runner.next;
@@ -121,10 +119,8 @@ public class MergeTwoSortedLists {
         while(l1 != null && l2 != null){
             runner.next = (l1.val < l2.val) ? l1 : l2;
             if(l1.val < l2.val){
-                runner.next = l1;
                 l1 = l1.next;
             } else if(l1.val >= l2.val){
-                runner.next = l2;
                 l2 = l2.next;
             }
             runner = runner.next;

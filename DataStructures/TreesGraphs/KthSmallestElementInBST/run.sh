@@ -1,0 +1,2 @@
+javac KthSmallestElementInBST.java
+java KthSmallestElementInBST

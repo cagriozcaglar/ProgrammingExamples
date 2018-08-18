@@ -37,7 +37,9 @@ import java.util.regex.*;
 
 public class CoinChange {
 
-    // Recursive solution
+    /**
+     * Recursive solution
+     */
     static long getWaysRecursive(long target, long[] coins, int coinIndex) {
         // Base case 1: We ran out of target money.
         // If target is reached, there is only one solution, which is to add no other coins.
@@ -63,7 +65,9 @@ public class CoinChange {
         return ways;
     }
 
-    // Dynamic Programming solution
+    /**
+     * Dynamic Programming solution
+     */
     static long getWaysDynamicProgramming(long target, long[] coins, int coinIndex, HashMap<String, Long> memo) {
         // Base case 1: We ran out of target money.
         // If target is reached, there is only one solution, which is to add no other coins.
@@ -107,7 +111,7 @@ public class CoinChange {
         return ways;
     }
 
-    static void getAllWays(long target, long[] coins){
+    static void runTestCase(long target, long[] coins){
         // Timers for profiling
         long startTime;
         long endTime;
@@ -138,7 +142,7 @@ public class CoinChange {
         // Test 1
         int n = 4;
         long[] coins1 = {1, 2, 3};
-        getAllWays(n, coins1);
+        runTestCase(n, coins1);
         /*
         Number of ways: 4
         Recursive:             4,595 ns
@@ -148,7 +152,7 @@ public class CoinChange {
         // Test 2
         n = 10;
         long[] coins2 = {2, 3, 5, 6};
-        getAllWays(n, coins2);
+        runTestCase(n, coins2);
         /*
         Number of ways: 5
         Recursive:            6,057 ns
@@ -158,7 +162,7 @@ public class CoinChange {
         // Test 3
         n = 100;
         long[] coins3 = {2, 3, 5, 6};
-        getAllWays(n, coins3);
+        runTestCase(n, coins3);
         /*
         Number of ways: 1163
         Recursive:             888,360 ns
@@ -168,7 +172,7 @@ public class CoinChange {
         // Test 4
         n = 1000;
         long[] coins4 = {2, 3, 5, 6};
-        getAllWays(n, coins4);
+        runTestCase(n, coins4);
         /*
         Number of ways: 948,293
         Recursive:            804,397,007 ns
@@ -178,7 +182,7 @@ public class CoinChange {
         // Test 5
         n = 2000;
         long[] coins5 = {2, 3, 5, 6};
-        getAllWays(n, coins5);
+        runTestCase(n, coins5);
         /*
         Number of ways: 7,496,697
         Recursive:            12,104,041,809 ns

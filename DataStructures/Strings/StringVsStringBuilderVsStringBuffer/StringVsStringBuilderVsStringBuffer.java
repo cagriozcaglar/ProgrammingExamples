@@ -92,9 +92,9 @@ public class StringVsStringBuilderVsStringBuffer {
         /**
          * Profiling: Join words with String vs. StringBuilder vs. StringBuffer
          * Result:
-         * 1) StringBuilder (7007 ns)
-         * 2) StringBuffer (10983 ns)
-         * 3) StringBuffer (10983 ns)
+         * 1) String        (17646 ns)
+         * 2) StringBuilder (6939 ns)
+         * 3) StringBuffer  (12425 ns)
          */
         System.out.println("\nProfiling: Join words with String vs. StringBuilder vs. StringBuffer");
         String[] words = {"How", " are", " you", " doing?"};

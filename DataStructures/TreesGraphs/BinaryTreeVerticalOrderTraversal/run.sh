@@ -1,0 +1,2 @@
+javac BinaryTreeVerticalOrderTraversal.java
+java BinaryTreeVerticalOrderTraversal

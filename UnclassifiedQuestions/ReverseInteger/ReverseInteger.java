@@ -70,7 +70,7 @@ public class ReverseInteger {
         long absoluteValue = Math.abs((long)x);
         String signString = (x >= 0) ? "" : "-" ;
 
-        // Get reverse of the absolute value,
+        // Get reverse of the absolute value, using in-place StringBuilder.reverse() method
         StringBuilder reverseValueStringBuilder = new StringBuilder(Long.toString(absoluteValue));
         reverseValueStringBuilder.reverse();
         reverseValueStringBuilder.insert(0, signString);

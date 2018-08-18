@@ -1,0 +1,2 @@
+javac SparseMatrixMultiplication.java
+java SparseMatrixMultiplication

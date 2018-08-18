@@ -1,0 +1,2 @@
+javac BasicLinkedListOperations.java
+java BasicLinkedListOperations

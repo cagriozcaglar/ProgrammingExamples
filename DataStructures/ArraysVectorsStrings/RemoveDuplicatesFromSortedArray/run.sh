@@ -1,0 +1,2 @@
+javac RemoveDuplicatesFromSortedArray.java
+java RemoveDuplicatesFromSortedArray

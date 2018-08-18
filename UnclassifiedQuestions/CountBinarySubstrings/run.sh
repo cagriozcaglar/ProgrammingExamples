@@ -1,0 +1,2 @@
+javac CountBinarySubstrings.java
+java CountBinarySubstrings

@@ -1,0 +1,2 @@
+javac FindKclosestElements.java
+java FindKclosestElements

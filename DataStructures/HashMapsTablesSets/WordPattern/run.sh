@@ -1,0 +1,2 @@
+javac WordPattern.java
+java WordPattern

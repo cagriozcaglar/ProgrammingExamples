@@ -26,7 +26,7 @@ class heighOfBinaryTree {
     static int height(Node root) {
         if (root == null) {
             // System.out.println("Null checker: root null");
-            // Return -1 instead of 0: Becaue the height of a binary tree with only root node is 0.
+            // Return -1 instead of 0: Because the height of a binary tree with only root node is 0.
             return -1;
         } else {
             // System.out.println("Else: " + root.data);

@@ -1,0 +1,2 @@
+javac FirstUniqueCharacterInString.java
+java FirstUniqueCharacterInString

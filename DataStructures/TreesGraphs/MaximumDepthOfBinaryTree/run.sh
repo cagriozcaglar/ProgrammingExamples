@@ -1,0 +1,2 @@
+javac MaximumDepthOfBinaryTree.java
+java MaximumDepthOfBinaryTree

@@ -1,0 +1,2 @@
+javac LongestSubstringWithoutRepeatingCharacters.java
+java LongestSubstringWithoutRepeatingCharacters

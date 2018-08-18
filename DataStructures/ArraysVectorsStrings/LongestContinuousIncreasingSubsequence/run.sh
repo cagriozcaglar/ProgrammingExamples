@@ -1,0 +1,2 @@
+javac LongestContinuousIncreasingSubsequence.java
+java LongestContinuousIncreasingSubsequence

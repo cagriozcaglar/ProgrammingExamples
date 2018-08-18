@@ -1,0 +1,13 @@
+Recursion
+ - Print permutations
+ x Print combinations
+ + Make coin change
+ - Tree/Graph algorithms
+ - Stairs problem
+
+DynamicProgramming
+ - Longest Common Subsequence
+ - Knapsack problem (0-1 Knapsack)
+ - Balanced Array Partition: Partition an array of integer into two groups such that the difference of sums are minimum:
+    -- http://algorithmsandme.in/2014/04/balanced-partition-problem
+    -- https://people.cs.clemson.edu/~bcdean/dp_practice/dp_4.swf

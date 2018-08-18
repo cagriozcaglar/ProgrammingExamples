@@ -1,0 +1,2 @@
+javac FindAnagramMappings.java
+java FindAnagramMappings
