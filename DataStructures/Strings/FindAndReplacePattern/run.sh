@@ -1,0 +1,2 @@
+javac FindAndReplacePattern.java
+java FindAndReplacePattern
