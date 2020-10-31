@@ -4,3 +4,6 @@
 *.iml
 *.exe
 *.idea/
+*~
+*/lib*
+
