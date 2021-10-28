@@ -1,2 +1,4 @@
 javac MaximumDepthOfBinaryTree.java
 java MaximumDepthOfBinaryTree
+
+python3 MaximumDepthOfBinaryTree.py

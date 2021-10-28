@@ -10,6 +10,12 @@ Several points to note:
 3) Also note that when traversing in four directions, the board needs to backtrack back when switching to a new direction.
 4) Also pay attention to judging the boundary and judging whether the location in the code has been visited. Generally speaking, these two judgments are together, but because some conversions between list and string are involved, these two need to be separated
 """
+"""
+Sliding Puzzle
+"""
+import collections
+from typing import List
+
 class Solution:
     # BFS + Backtracking (BFS => Greedy, because we need min number of moves)
     # Shortest path problem, but, because edges are unweighted, it can be solved with BFS

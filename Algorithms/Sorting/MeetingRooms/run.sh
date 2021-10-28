@@ -1,0 +1,2 @@
+javac MeetingRooms.java
+java MeetingRooms

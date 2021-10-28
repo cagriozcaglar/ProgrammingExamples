@@ -1,0 +1,2 @@
+javac HammingDistance.java
+java HammingDistance

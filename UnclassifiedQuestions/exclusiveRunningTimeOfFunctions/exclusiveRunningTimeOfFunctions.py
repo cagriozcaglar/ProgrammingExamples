@@ -1,7 +1,7 @@
 # Given a log file of function running times in the following format:
 ### [functionName],[timeStamp],[beginOrEnd]
 # Return the exclusive running time of each function in the log file
-''' Example input:
+""" Example input:
 f1      50.0    b
 f2      80.0    b
 f3      120.0   b
@@ -10,19 +10,21 @@ f1      250.0   e
 f4      290.0   b
 f3      400.0   e
 f4      500.0   e
-'''
-''' Example output:
+"""
+
+""" Example output:
 f1   30.0
 f2   40.0
 f3   170.0
 f4   210.0
-'''
-''' Calculations using the program below
+"""
+
+""" Calculations using the program below
 f1: 30
 f2: 40
 f3: 80 + 50 + 40 = 170
 f4: 110 + 100 = 210
-'''
+"""
 
 import sys
 from collections import defaultdict
@@ -51,30 +53,30 @@ for line in lines:
     timeCur = float(timeStampString)
     print(functionName + ', ' + timeStampString + ", " + beginOrEnd) 
     # If timePrev is None, then this is the first line of the function log.
-    if(timePrev is None):
+    if timePrev is None:
         # If a function begins as the first element, push function to callStack.
-        if(beginOrEnd == 'b'):
+        if beginOrEnd == 'b':
             callStack.append(functionName)
             print("Append " + functionName + " to call stack.")
         # If a function ends, given that there is no timePrev, return error.
-        elif(beginOrEnd == 'e'):
+        elif beginOrEnd == 'e':
             sys.exit('Error: Function call stack is empty, no function to remove from call stack.')
     # If timePrev is assigned, e.g. this is not the first line of the function log
-    elif(timePrev is not None):
+    elif timePrev is not None:
         # Get top element, this is the function which has been running from timePrev to timeCur.
         # Add (timeCur-timePrev) to the exclusive running time of this function.
         topElement = callStack[-1]
         runningTimeMap[topElement] = runningTimeMap[topElement] + (timeCur - timePrev)
         # If the new function is beginning, push it to call stack.
-        if(beginOrEnd == 'b'):
+        if beginOrEnd == 'b':
             callStack.append(functionName)
             print("Append " + functionName + " to call stack.")
         # If the new function is ending, pop it from the stack
-        elif(beginOrEnd == 'e'):
-            while( len(callStack) > 0 and functionName != callStack[-1]):
+        elif beginOrEnd == 'e':
+            while len(callStack) > 0 and functionName != callStack[-1]:
                 callStackTemp.append(callStack.pop())
                 print("Append " + callStackTemp[-1] + " from call stack to temporary call stack.")
-            if(len(callStack) == 0):
+            if len(callStack) == 0:
                 sys.exit('Error: Function does not exist in the call stack.')
             print("Pop element from call stack, append elements in temporary call stack to actual call stack.")
             callStack.pop()

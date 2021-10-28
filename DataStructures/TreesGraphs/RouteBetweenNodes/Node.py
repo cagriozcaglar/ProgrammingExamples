@@ -10,11 +10,13 @@ class State(Enum):
 
 
 class Node:
-    # def __init__(self, data: int, state: State, children: List[Node] = []):
-    def __init__(self, data: int, state: State, children: List[Node] = []):
+    """
+    Node class
+    """
+    def __init__(self, data: int, state: State = State.UNVISITED):
         self.data = data
         self.state = state
-        self.children: List[Node] = children
+        self.children: List[Node] = []
 
     def addChild(self, node: Node) -> None:
         self.children.append(node)
@@ -22,7 +24,7 @@ class Node:
     def getChildren(self) -> List[Node]:
         return self.children
 
-    def __str__(self):
+    def __str__(self) -> str:
         childrenSerialized = f"[{','.join([str(childNode.data) for childNode in self.getChildren()])}]"
         return f"Node: value = {self.data}, state = {self.state}, children = {childrenSerialized}"
 
@@ -36,3 +38,4 @@ if __name__ == "__main__":
     # Node: value = 1, state = State.UNVISITED, children = [2]
     node1.addChild(Node(3, State.UNVISITED))
     print(node1)
+    # Node: value = 1, state = State.UNVISITED, children = [2,3]
