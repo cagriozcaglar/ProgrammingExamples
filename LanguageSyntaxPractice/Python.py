@@ -1173,3 +1173,167 @@ print(largestElements)
 [9, 8, 7]
 '''
 print("Python Heap Example ends")
+
+# ARRAYS
+# Represented using lists (dynamically resized)
+# Instantiation
+listExamples = [
+    [3, 5, 7],
+    [1] + [0] * 10,
+    list(range(10)),
+]
+for listExample in listExamples:
+    print(listExample)
+'''
+[3, 5, 7]
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+'''
+
+# Basic ops
+A = [11,12,13,14]
+print(len(A))
+# 4
+A.append(15)
+# [11, 12, 13, 14, 15]
+print(A)
+A.remove(12)
+# [11, 13, 14, 15]
+print(A)
+A.insert(3, 28)
+print(A)
+# [11, 13, 14, 28, 15]
+
+from pprint import pprint
+# Instantiate 2-D array
+B = [
+    [1,2,4],
+    [3,5]
+]
+pprint(B)
+'''
+[[1, 2, 4], [3, 5]]
+'''
+print(*B, sep="\n")
+'''
+[1, 2, 4]
+[3, 5]
+'''
+# Membership
+A = [11,12,13,14]
+print(11 in A)
+# True
+print(15 in A)
+# False
+
+# Copying arrays
+A = [11,12,13,14]
+B = A
+print(B)
+# [11, 12, 13, 14]
+C = list(A)
+print(C)
+# [11, 12, 13, 14]
+# Change A
+A.append(15)
+print(A)
+# [11, 12, 13, 14, 15]
+print(B)  # *impacted* by the change in A
+# [11, 12, 13, 14, 15]
+print(C)  # *not impacted* by the change in A
+# [11, 12, 13, 14]
+
+# copy.copy (shallow copy) vs. copy.deepcopy (deep copy)
+from copy import copy, deepcopy
+A = [11,12,13,14]
+A_shallow_copy = copy(A)
+A_deep_copy = deepcopy(A)
+print(A)
+# [11, 12, 13, 14]
+print(A_shallow_copy)
+# [11, 12, 13, 14]
+print(A_deep_copy)
+# [11, 12, 13, 14]
+# Change A
+A.append(15)
+print(A)
+# [11, 12, 13, 14, 15]
+print(A_shallow_copy)
+# [11, 12, 13, 14]
+print(A_deep_copy)
+# [11, 12, 13, 14]
+
+# Binary search in arrays
+A = [11,12,13,14,15]
+from bisect import bisect, bisect_left, bisect_right
+bisect(A, 14)
+# 4 => Index of element with value 14, plus one on this index.
+bisect_left(A, 14)
+# 3
+bisect_right(A, 14)
+# 4
+
+# Hashing mutable types
+# Hashing a set
+a = set([1,2,3])
+hash(a)
+'''
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'set'
+'''
+# Set type is mutable. Instead, we use frozenset before hashing.
+b = frozenset([1,2,3])
+hash(b)
+# -272375401224217160
+
+# Class hash and equality methods: __hash__(self), and __eq__(self, other). Example below:
+class ContactList:  # A class representing list of contact names
+    def __init__(self, names: List):
+        self.names = names
+    
+    # Hash function, used in object equality
+    def __hash__(self):
+        return hash(frozenset(self.names)) # frozenset instead of set, because set type is mutable.
+    
+    # Equality function, determining object inequality
+    def __eq__(self, other):
+        return set(self.names) == set(other.names)
+    
+
+# Multimap: A dictionary which returns multiple values for a given key.
+# Python standard library doesn't have this DS, but it is equivalent to map returning list of values.
+multimap = {}  # or defaultdict(list)
+# Adding key-value pairs
+multimap['a'] = [1, 2]
+multimap['b'] = [3]
+
+# Iterating through the multimap
+for key, values in multimap.items():
+    print(f"{key}: {values}")
+'''
+a: [1, 2]
+b: [3]
+'''
+
+# Set subset check: using <= operator
+a = set([1,2,3])
+b = set([1,2,3,4])
+print(a <= b)
+# True
+# Set difference: using - operator
+print(a-b)
+# set()
+print(b-a)
+# {4}
+
+
+# Generate cumulative sum / prefix sum of the array in one line:
+import itertools
+list(itertools.accumulate([1, 2, 3, 4]))
+# [1, 3, 6, 10]
+
+# The id() function in Python is a built-in function that accepts a single argument, an object,
+# and returns its unique identity (an integer) which represents the object's memory address.
+id([2,3,4])       # 4299607744
+id(set([2,3,4]))  # 4299630176
