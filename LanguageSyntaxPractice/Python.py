@@ -23,12 +23,13 @@ class Box:
         self.height = height
         self.width = width
         self.depth = depth
-    # Serialize the box and print
-    def toString(self):
-        print(f"({self.height}, {self.width}, {self.depth})")
+    # __str__ method: Serialize the box object
+    def __str__(self):
+        return f"({self.height}, {self.width}, {self.depth})"
 
 def printBoxList(boxes: List[Box]):
-    [box.toString() for box in boxes]
+    for box in boxes:
+        print(box)  # Calls __str__ method of Box class internally
 
 boxes : List[Box] = [
     Box(3, 4, 5),
@@ -51,6 +52,7 @@ printBoxList(boxes)
 '''
 # Sort by height in reverse order, which is decreasing / descending order
 boxes.sort(key= lambda box : box.height, reverse=True)
+printBoxList(boxes)
 '''
 (5, 4, 3)
 (3, 4, 5)
@@ -71,9 +73,9 @@ list(result)
 # [1, 4, 9, 16]
 
 # Ranges
-range(5)      # [0,1,2,3,4]
-range(1,5)    # [1,2,3,4]
-range(1,5,2)  # [1,3]  (3rd argument of range() method is the stepSize=2)
+list(range(5))      # [0,1,2,3,4]
+list(range(1,5))    # [1,2,3,4]
+list(range(1,5,2))  # [1,3]  (3rd argument of range() method is the stepSize=2)
 
 # Numeric values of booleans
 int(True)
@@ -89,17 +91,20 @@ random.random()
 # Pick an integer between [0, n) ( == [0, n-1])
 n = 5
 pick = int(random.random() * n)
-# Returns integers between 0-4.
+pick
+# Returns integers between 0-4, both inclusive.
 # Returns an integer between [a,b] (both inclusive)
 random.randint(0, 10)
 # E.g. select a random pivot index between [left, right] (both inclusive)
 left = 3
 right = 5
 pivot_idx = random.randint(left, right)
+pivot_idx
 # Choose an element from a list
 import random
-random.choice([1,2,3])
-# Returns one of 1,2,3
+chosen_element = random.choice([1,2,3])
+chosen_element
+# Returns one of 1, 2, 3
 
 # One line swap
 a = 3
@@ -130,10 +135,10 @@ math.isnan(x)
 x = [1,2,3,4]
 math.prod(x)
 # 24
-# Return the Real value x truncated to an Integral (usually an integer).
+# Return the Real value x truncated to an Integral (usually an integer). Return value is the same as math.ceil(x).
 x = 4.3
 math.trunc(x)
-4
+# 4
 # exp(): Return e raised to the power x, where e = 2.718281… is the base of natural logarithms.
 math.exp(x)
 # 73.69979369959579
@@ -145,9 +150,13 @@ math.log(x)
 # log2()
 math.log2(x)
 # 2.1043366598147357
+math.log(x, 2)
+# 2.1043366598147357
 # log10()
 math.log10(x)
 # 0.6334684555795865
+math.log(x, 10)
+# 0.6334684555795864
 # pow(x,y): Return x raised to the power y.
 y = 1
 math.pow(x, y)
@@ -160,7 +169,7 @@ math.sqrt(x)
 x = [1.0, 1.0]
 y = [4.0, 5.0]
 math.dist(x,y)
-5.0  # 3^2 + 4^2 = 5^2
+5.0  # sqrt(3^2 + 4^2) = 5.0
 # .pi: The mathematical constant π = 3.141592
 math.pi
 # 3.141592653589793
@@ -170,8 +179,12 @@ math.e
 # A floating-point positive infinity. (For negative infinity, use -math.inf.) Equivalent to the output of float('inf').
 math.inf
 # inf
+float('inf')
+# inf
 # A floating-point “not a number” (NaN) value. Equivalent to the output of float('nan').
 math.nan
+# nan
+float('nan')
 # nan
 # math.gcd(*integers): Return the greatest common divisor of the specified integer arguments.
 math.gcd(10, 25)
@@ -197,9 +210,9 @@ aList[2]: 3
 '''
 
 # Loops
-# Iterate over pairs by careful off-by-one
+# Iterate over **pairs** by careful off-by-one
 values = [0, 1, 2, 3]
-for i in range(0, len(values)-1):
+for i in range(0, len(values)-1):  # -1, because we are going over pairs, and second value of the pair is at index i+1.
     print(f"({values[i]}, {values[i+1]})")
 '''
 (0, 1)
@@ -211,9 +224,9 @@ list(reversed(range(5)))
 # [4, 3, 2, 1, 0]
 # Use product() method to generate cartesian product, to iterate over nested loops
 from itertools import product
-list(product(range(2),range(3)))
+list(product(range(2),range(3)))  # [0, 1] vs. [0, 1, 2]
 # [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)]
-list(product([1,2], [3,4,5]))
+list(product([1, 2], [3, 4, 5]))
 # [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5)]
 nrows = 2
 ncols = 3
@@ -230,6 +243,8 @@ for row, col in list(product(range(nrows),range(ncols))):
 # Iterate over character pairs of two strings to find longest common prefix
 str1 = "abcd"
 str2 = "abc"
+list(zip(str1, str2))
+# [('a', 'a'), ('b', 'b'), ('c', 'c')]
 substring = ""
 for ch1, ch2 in zip(str1, str2):
     if ch1 != ch2:
@@ -263,6 +278,8 @@ def range_generator(a, b):
     # When we get here, the generator is finished.
 # Create a new range_generator object for the numbers 10 to 20.
 ten_to_twenty_generator = range_generator(10, 20)
+list(ten_to_twenty_generator)
+# [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 # Get the first 3 values out of the range_generator object we made.
 print(next(ten_to_twenty_generator))
 # 10
@@ -281,9 +298,8 @@ for char in reverse('golf'):
 # o
 # g
 
-# TODO
-#   MULTI-THREADING / CONCURRENCY
-#   https://realpython.com/intro-to-python-threading/
+# TODO: MULTI-THREADING / CONCURRENCY
+# https://realpython.com/intro-to-python-threading/
 
 # Binary Search using bisect (=bisect_right), bisect_left
 # https://docs.python.org/3/library/bisect.html
@@ -314,9 +330,9 @@ a
 
 # Maximum / minimum integers
 import sys
-sys.maxint
+sys.maxsize  # sys.maxsize in Python3, sys.maxint in Python2.
 # 9223372036854775807
--sys.maxint - 1
+-sys.maxsize - 1  # sys.maxsize in Python3, sys.maxint in Python2.
 # -9223372036854775808
 # Numbers higher / lower than any others: Float
 float('inf')
@@ -334,9 +350,12 @@ float('-inf')
 populateArrayEasily = [True] * 10
 
 # Initialize a list of lists
-listOfLists = [[]]
+list_of_lists = [['a', 'b'], ['c']]
+list_of_lists
 # Concatenate lists
-val = ["a"] + ["b"]  # Result: ['a', 'b']
+val = ["a"] + ["b"]
+val
+# ['a', 'b']
 
 # ord(): Convert character to integer representing Unicode character
 # https://www.programiz.com/python-programming/methods/built-in/ord
@@ -352,8 +371,10 @@ bin(12)  # '0b1100'
 
 # map function for converting types
 # https://www.geeksforgeeks.org/python-program-to-convert-list-of-integer-to-list-of-string/
-x = [1,2,3]
-map(str, x)  # ['1', '2', '3']
+x = [1, 2, 3]
+y = map(str, x)
+print(list(y))
+# ['1', '2', '3']
 
 # Enums
 from enum import Enum
@@ -379,8 +400,8 @@ print(b)
 
 # Generate frequency map of a container using Counter
 from collections import Counter
-nums = [1,1,2,3,3,3]
-Counter(nums)
+nums = [1, 1, 2, 3, 3, 3]
+Counter(nums)  # sorted in decreasing order of frequency, by default.
 # Counter({3: 3, 1: 2, 2: 1})
 # Now, convert to dictionary
 dict(Counter(nums))
@@ -394,18 +415,23 @@ Counter('abracadabra').most_common(3)
 # sha256
 # E.g. you can use to hash trees as in Merkle trees
 from hashlib import sha256
+text = "abc"
 S = sha256()
 S
 # <sha256 _hashlib.HASH object @ 0x1038c5630>
-S.update(1)
 S.hexdigest()
 # 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+S.update(text.encode('utf-8'))
+S.hexdigest()
+# 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
 
 # LOGICAL OPERATORS / KEYWORDS
 # all()
 seen = [False] * 10
 seen[0] = True
-all(seen)  # Returns false
+all_seen = all(seen)  # Returns false
+print(all_seen)
+# False
 # and / or / not ( Forget &&, ||, !, this is not Java)
 
 # TERNARY OPERATOR
@@ -422,11 +448,11 @@ x
 # https://docs.python.org/3/tutorial/errors.html
 try:
     10 * (1/0)
-except ZeroDivisionError:  # When exception of this type is caught
-    print("Exception handled here: ZeroDivisionError")
 except (RuntimeError, TypeError, NameError):  # Can have multiple exception types
     print("Do not handle these exceptions")
     pass
+except ZeroDivisionError:  # When exception of this type is caught
+    print("Exception handled here: ZeroDivisionError")
 '''
 Exception handled here: ZeroDivisionError
 '''
@@ -455,7 +481,7 @@ Exception handled here: ZeroDivisionError
 '''
 # finally clause: Optional in try-[except]-[finally] clause.
 # The finally clause will execute as the last task before the try statement completes.
-# The finally clause runs whether or not the try statement produces an exception.
+# The finally clause runs ** whether or not the try statement produces an exception **.
 try:
     10 / 0
 except ZeroDivisionError:
@@ -498,19 +524,24 @@ File "<stdin>", line 3, in divide
 TypeError: unsupported operand type(s) for /: 'str' and 'str'
 '''
 
-# TESTING WITH PYTEST
-import pytest
+# Testing with assert statements
 def getVal(x: int):
     return x+1
 # Test starts here
-def test_capital_case():
+def test_values():
     print("testing this one now")
     assert getVal(5) == 6
     print("Test is correct if it reached here")
-test_capital_case()
+    assert getVal(5) == 7
+    print("Test is incorrect, execution flow will not get to this point")
+test_values()
 '''
 testing this one now
 Test is correct if it reached here
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 5, in test_values
+AssertionError
 '''
 
 ######################
@@ -555,10 +586,8 @@ print(a_string)
 # Split string by a list of delimiters
 import re
 a='Beautiful, is; better*than\nugly'
-re.split('; |, |\*|\n',a)
+re.split('; |, |\*|\n', a)
 # ['Beautiful', 'is', 'better', 'than', 'ugly']
-
-
 
 # Character count map of a string
 import collections
@@ -586,7 +615,7 @@ expression.replace('(', ' ( '). replace(')', ' ) ').split()
 # True
 "1".isdigit()
 # True
-"123".isdigit()
+"123".isdigit()  # returns true if all characters of the string are digits
 # True
 "123".isnumeric()
 # True
@@ -605,14 +634,14 @@ expression.replace('(', ' ( '). replace(')', ' ) ').split()
 words = ["be", "se", "on"]
 for word in words:
     for letter in word:
-        print(f"do something here: {letter}")
+        print(f"{word}: {letter}")
 '''
-do something here: b
-do something here: e
-do something here: s
-do something here: e
-do something here: o
-do something here: n
+be: b
+be: e
+se: s
+se: e
+on: o
+on: n
 '''
 # Cartesian product of characters of two strings using product() method
 from itertools import product
@@ -632,19 +661,21 @@ a[2:4]    # left index (2) inclusive, right index (4) exclusive
 # Append: Appends object at the end
 x = [1, 2, 3]
 x.append([4, 5])
-print(x)   # [1, 2, 3, [4, 5]]
+print(x)
+# [1, 2, 3, [4, 5]]
 # Extend: Extends list by appending elements from the iterable.
 # CAREFUL: Grow a list with another list using extend(), not append()
 x = [1, 2, 3]
 x.extend([4, 5])
-print(x)   # [1, 2, 3, 4, 5]
+print(x)
+# [1, 2, 3, 4, 5]
 # += to append element to a list
 a = [1,2,3]
-a += [4]
+a += [4, 5]
 a
-# [1, 2, 3, 4]
+# [1, 2, 3, 4, 5]
 # 3. Remove element from lists
-l = [1,2,3,4,5]
+l = [1, 2, 3, 4, 5]
 # Remove element at index 0 using pop(index)
 l.pop(0)
 # 1
@@ -656,9 +687,7 @@ l.pop()
 l
 # [2, 3, 4]
 # Insert to the beginning ( .insert(0,x) ) and end of a list ( .append(x) )
-a = [1,2,3,4,5]
-a
-# [1, 2, 3, 4, 5]
+a = [1, 2, 3, 4, 5]
 a.insert(0, 100)
 a
 # [100, 1, 2, 3, 4, 5]
@@ -667,8 +696,6 @@ a
 # [100, 1, 2, 3, 4, 5, 200]
 # Remove element at the beginning ( .pop(0) ) and end of a list ( .pop(-1) )
 a = [100, 1, 2, 3, 4, 5]
-a
-# [100, 1, 2, 3, 4, 5]
 # Remove first element
 a.pop(0)
 # 100
@@ -681,7 +708,7 @@ a
 # [1, 2, 3, 4]
 # Mean / median / mode / stdev / variance of a list (use statistics library)
 from statistics import mean, median, mode, stdev, variance
-theList = [1,2,3,4]
+theList = [1, 2, 3, 4]
 mean(theList)
 # 2.5
 median(theList)
@@ -694,29 +721,36 @@ variance(theList)
 # 1.6666666666666667
 # Return combinations of size k
 # https://docs.python.org/3/library/itertools.html#itertools.combinations
-from itertools
-list(itertools.combinations([1,2,3,4], 2))
+import itertools
+list(itertools.combinations([1, 2, 3, 4], 2))
 # [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
 list(itertools.combinations("abcd", 2))
 # [('a', 'b'), ('a', 'c'), ('a', 'd'), ('b', 'c'), ('b', 'd'), ('c', 'd')]
 # 1. Serialize / join list into string using join() method
-",".join(["1","2"])
+",".join(["1", "2"])
 # '1,2'
 # Note: Passing ints in the list will return failure: ",".join([1,2]) => error
+",".join([1,2])
+'''
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: sequence item 0: expected str instance, int found
+'''
 # 2. Deserialize string into list using split() method
 '1,2'.split(",")
 # ['1', '2']
 
 # Add an element to each list in a list of lists
 y = [[1, 2, 1, 1], [3, 4, 1], [5, 6, 1]]
-# >>> y
-# [[1, 2, 1, 1], [3, 4, 1], [5, 6, 1]]
-[yy.append("AA") for yy in y]
+z = [yy.append("AA") for yy in y]
+z
 # [None, None, None]
-# >>> y
+y
 # [[1, 2, 1, 1, 'AA'], [3, 4, 1, 'AA'], [5, 6, 1, 'AA']]
+
 # Extended Slicing in Lists: https://docs.python.org/release/2.3.5/whatsnew/section-slices.html
 L = range(10)
+list(L)
 # return elements with index multiple of 2
 L[::2]
 # [0, 2, 4, 6, 8]
@@ -736,13 +770,14 @@ s[::-1]
 # Method 1: Cumulative sum using accumulate (easier)
 from itertools import accumulate
 # Calculate cumulative sum of the list, return a generator (not a list)
-accumulate([1, 2, 3, 4, 5])
+values = [1, 2, 3, 4, 5]
+accumulate(values)
 # <itertools.accumulate object at 0x10ebec980>
 # Convert generator to list
-list(accumulate([1, 2, 3, 4, 5]))
+list(accumulate(values))
 # [1, 3, 6, 10, 15]
 # Read from generator
-values = accumulate([1,2,3,4,5])
+values = accumulate(values)
 for value in values:
     print(value)
 '''
@@ -755,8 +790,9 @@ for value in values:
 # Method 2: Cumulative sum of an array using slicing
 a = [1, 2, 3, 4, 5]
 k = 3
-sum(a[0:k:1])  # Cumulative cum of first k elements
+sum(a[0:k:1])  # Sum of first k elements
 # 6
+# Cumulative sum of first k elements
 cumsum_a = [sum(a[0:x:1]) for x in range(0, len(a)+1)]
 cumsum_a
 # [0, 1, 3, 6, 10, 15]
@@ -768,20 +804,31 @@ cumsum_a[1:]
 n = 10
 m = 20
 twoDimArray = [[1] * n for _ in range(m)]
+len(twoDimArray)
+# 20
+len(twoDimArray[0])
+# 10
 # 10x10 2-D matrix with all dots in cells
 empty_board = [["."] * n for _ in range(n)]
 # Find the max of 2-D array
 maxVal = max(max(x) for x in twoDimArray)
 
 # Reverse a list: https://www.programiz.com/python-programming/methods/list/reverse
-a = [1,2,3,4,5]
+a = [1, 2, 3, 4, 5]
 #   In-place reverse
 a.reverse()  # a will have the reverse values afterwards
+a
+# [5, 4, 3, 2, 1]
 #   Slicing (not in-place)
 b = a[::-1]  # Reversal is not in-place: a will have the original list, b will have the reverse list
-#   Reversed keyword, followed by casting as a list (not in-place)
+b
+# [1, 2, 3, 4, 5]
+# Reversed keyword, followed by casting as a list (not in-place)
 b = list(reversed(a))   # reversed() returns iterator, casting to list returns the reversed list
                         # Not in-place: a will have the original list, b will have the reverse list
+b
+# [1, 2, 3, 4, 5]
+
 
 # Iterate over matrix cells in 4-potential directions:
 # explore the 4 potential directions around
@@ -789,23 +836,31 @@ row, col = 0, 0
 directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 for ro, co in directions:
     next_row, next_col = row + ro, col + co
-
+    print(f"({next_row}, {next_col})")
+'''
+(0, 1)
+(0, -1)
+(1, 0)
+(-1, 0)
+'''
 
 # MAP / HASHMAP / DICTIONARY
 # Get element from map with default value
 theMap = {"a" : 1, "b" : 2}
 key = "c"
-theMap.get(key, 0)
+theMap.get(key, 0)  # default return value is 0.
 # E.g. increment value of b
 theMap["b"] = theMap.get("b", 0) + 1
 # Add new elements to dictionary
 a = {1:2, 3:4}
 a.update({5:6})
+a
 # {1: 2, 3: 4, 5: 6}
 # Delete an element from a map using del keyword
 a = dict({1: '1', 2: '2', 3: '3'})
 del a[2]
 a
+# {1: '1', 3: '3'}
 # Delete an element from map using pop(item) method
 a = {1:2, 3:4, 5:6}
 a.pop(1)
@@ -859,8 +914,9 @@ dict(sorted(sd.items(), key=lambda item: item[1], reverse=True))
 # {'c': 3, 'b': 2, 'a': 1}
 # Another way: use SortedDict
 # See it here: http://www.grantjenks.com/docs/sortedcontainers/
-from sortedcontainers import SortedDict
+from sortedcontainers import SortedDict  # pip3 install sortedcontainers
 sd = SortedDict({'c': 3, 'a': 1, 'b': 2})
+sd.values
 print(sd)
 # SortedDict({'a': 1, 'b': 2, 'c': 3})
 sd.popitem(index=-1)
@@ -870,6 +926,8 @@ sd.popitem(index=-1)
 import collections
 d = {2: 3, 1: 89, 4: 5, 3: 0}
 orderedD = collections.OrderedDict(sorted(d.items()))
+orderedD  # Keys are sorted in increasing order
+# OrderedDict([(1, 89), (2, 3), (3, 0), (4, 5)])
 # More readable version of the line above
 orderedD = collections.OrderedDict(sorted(d.items(), key= lambda x: x[0]))
 orderedD
@@ -899,26 +957,28 @@ a = set()
 # Add / Remove
 a.add("a")
 print(a)
-# set(['a'])
+# {'a'}
 a.remove("a")
 print(a)
-# set([])
+# set()
 # Remove element not in set, returns key error
 a.remove("b")
-# ## Traceback (most recent call last):
-# ## File "<stdin>", line 1, in <module>
-# ## KeyError: 'b'
+'''
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'b'
+'''
 # In such cases where key does not exist in set, use discard() method instead of remove()
 a.discard("b")
-print(a)
-set([])
+a
+# set()
 # Check set equality using == operator
-a = set([1,2,3])
-b = set([3,2,1])
-a == b
+a = set([1, 2, 3])
+b = set([3, 2, 1])
+a == b  # order doesn't matter.
 # True
 # Convert a list to set
-theList = [1,2,3,4,3,2,1]
+theList = [1, 2, 3, 4, 3, 2, 1]
 theSet = set(theList)
 theSet
 # {1, 2, 3, 4}
@@ -948,6 +1008,7 @@ stackUsingList
 # Peek(): Get top element using slicing
 stackUsingList[-1]
 # 'a'
+stackUsingList  # Value didn't change after peek() method call
 # Stack Implementation using deque
 from collections import deque
 stackUsingDeque = deque()
@@ -963,6 +1024,9 @@ stackUsingDeque
 # Peek top element
 stackUsingDeque[-1]
 # 'c'
+stackUsingDeque  # Value didn't change after peek() method call
+# deque(['b', 'c'])
+
 
 # QUEUE
 # Init queue with empty list
@@ -999,6 +1063,14 @@ QueueFromEmptyList = deque([])
 QueueFromEmptyList.append(1)
 QueueFromEmptyList.append(2)
 QueueFromEmptyList.append(3)
+QueueFromEmptyList
+# deque([1, 2, 3])
+QueueFromEmptyList.appendleft(4)
+QueueFromEmptyList
+# deque([4, 1, 2, 3])
+QueueFromEmptyList.popleft()
+QueueFromEmptyList
+# deque([1, 2, 3])
 
 
 # Dictionary initialization
@@ -1028,6 +1100,7 @@ class Number(object):
         return str(self.N)
 
 d = defaultdict(Number)
+# defaultdict(<class '__main__.Number'>, {})
 d['foo']
 # TypeError: __init__() takes exactly 2 arguments (1 given)
 
@@ -1062,7 +1135,6 @@ def closestKValues(self, root: TreeNode, target: float, k: int) -> List[int]:
         if len(heap) > k:
             heapq.heappop(heap)
         inorder(r.right)
-
     inorder(root)
     return [x for _, x in heap]
 # Peek() method: Take top element
@@ -1075,6 +1147,7 @@ heapq.heappush(heap, 2)
 heapq.heappush(heap, 5)
 heap[0]
 # 2
+heap  # Heap is unchanged after peek() (heap[0])
 # Because this is min value in the min heap, which is the top element
 heapq.heappop(heap)
 # 2
@@ -1114,8 +1187,8 @@ for element in theHeap:
 10
 '''
 
-# Push 9 on the heap, pop and return the smallest element of the heap
-heapq.heappushpop(theHeap,9)
+# heappushpop() method: Push 9 on the heap, pop and return the smallest element of the heap
+heapq.heappushpop(theHeap, 9)
 '''
 5
 '''
@@ -1127,8 +1200,8 @@ for element in theHeap:
 10
 '''
 
-# Pop and return the smallest element from the heap, and then push the new item
-heapq.heapreplace(theHeap,11)
+# heapreplace() method: Pop and return the smallest element from the heap, and then push the new item
+heapq.heapreplace(theHeap, 11)
 '''
 9
 '''
@@ -1140,39 +1213,25 @@ for element in theHeap:
 11
 '''
 
-# Create a heap from a list in-place, in-linear time
-newHeap = [9,8,7,6,5,4,3,2,1]
+# Create a heap from a list in-place, ** in linear time **.
+newHeap = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 heapq.heapify(newHeap)
-# Print the contents of the heap, written from root to down
-for element in newHeap:
-    print(element)
-'''
-1
-2
-3
-6
-5
-4
-7
-8
-9
-'''
+newHeap  # Print the contents of the heap, written from root to down
+# [1, 2, 3, 6, 5, 4, 7, 8, 9]
 
-# Get 4 smallest elements from the heap
-smallestElements = heapq.nsmallest(4,newHeap)
+# nsmallest() method: Get 4 smallest elements from the heap
+smallestElements = heapq.nsmallest(4, newHeap)
 print(smallestElements)
 '''
 [1, 2, 3, 4]
-
 '''
 
-# get 3 largest elements from the heap
+# nlargest() method: get 3 largest elements from the heap
 largestElements = heapq.nlargest(3,newHeap)
 print(largestElements)
 '''
 [9, 8, 7]
 '''
-print("Python Heap Example ends")
 
 # ARRAYS
 # Represented using lists (dynamically resized)
@@ -1191,26 +1250,25 @@ for listExample in listExamples:
 '''
 
 # Basic ops
-A = [11,12,13,14]
-print(len(A))
+A = [11, 12, 13, 14]
+len(A)
 # 4
 A.append(15)
+A
 # [11, 12, 13, 14, 15]
-print(A)
 A.remove(12)
+A
 # [11, 13, 14, 15]
-print(A)
 A.insert(3, 28)
-print(A)
+A
 # [11, 13, 14, 28, 15]
 
-from pprint import pprint
 # Instantiate 2-D array
 B = [
-    [1,2,4],
-    [3,5]
+    [1, 2, 4],
+    [3, 5]
 ]
-pprint(B)
+print(B)
 '''
 [[1, 2, 4], [3, 5]]
 '''
@@ -1219,55 +1277,55 @@ print(*B, sep="\n")
 [1, 2, 4]
 [3, 5]
 '''
-# Membership
-A = [11,12,13,14]
+# List membership check
+A = [11, 12, 13, 14]
 print(11 in A)
 # True
 print(15 in A)
 # False
 
 # Copying arrays
-A = [11,12,13,14]
-B = A
-print(B)
+A = [11, 12, 13, 14]
+B = A  # Shallow copy (points to same object)
+B
 # [11, 12, 13, 14]
-C = list(A)
-print(C)
+C = list(A) # Deep copy (created new elements in memory)
+C
 # [11, 12, 13, 14]
 # Change A
 A.append(15)
-print(A)
+A
 # [11, 12, 13, 14, 15]
-print(B)  # *impacted* by the change in A
+B  # *impacted* by the change in A (because B is a *shallow copy* of A)
 # [11, 12, 13, 14, 15]
-print(C)  # *not impacted* by the change in A
+C  # *not impacted* by the change in A (because B is a *deep copy* of A)
 # [11, 12, 13, 14]
 
 # copy.copy (shallow copy) vs. copy.deepcopy (deep copy)
 from copy import copy, deepcopy
-A = [11,12,13,14]
+A = [11, 12, 13, 14]
 A_shallow_copy = copy(A)
 A_deep_copy = deepcopy(A)
-print(A)
+A
 # [11, 12, 13, 14]
-print(A_shallow_copy)
+A_shallow_copy
 # [11, 12, 13, 14]
-print(A_deep_copy)
+A_deep_copy
 # [11, 12, 13, 14]
 # Change A
 A.append(15)
-print(A)
+A
 # [11, 12, 13, 14, 15]
-print(A_shallow_copy)
+A_shallow_copy
 # [11, 12, 13, 14]
-print(A_deep_copy)
+A_deep_copy
 # [11, 12, 13, 14]
 
 # Binary search in arrays
-A = [11,12,13,14,15]
+A = [11, 12, 13, 14, 15]
 from bisect import bisect, bisect_left, bisect_right
 bisect(A, 14)
-# 4 => Index of element with value 14, plus one on this index.
+# 4 => Index of element with value 14, plus one on this index. (bisect() == bisect_right())
 bisect_left(A, 14)
 # 3
 bisect_right(A, 14)
@@ -1275,7 +1333,7 @@ bisect_right(A, 14)
 
 # Hashing mutable types
 # Hashing a set
-a = set([1,2,3])
+a = set([1, 2, 3])
 hash(a)
 '''
 Traceback (most recent call last):
@@ -1317,14 +1375,14 @@ b: [3]
 '''
 
 # Set subset check: using <= operator
-a = set([1,2,3])
-b = set([1,2,3,4])
-print(a <= b)
+a = set([1, 2, 3])
+b = set([1, 2, 3, 4])
+a <= b
 # True
 # Set difference: using - operator
-print(a-b)
+a-b
 # set()
-print(b-a)
+b-a
 # {4}
 
 
@@ -1335,5 +1393,64 @@ list(itertools.accumulate([1, 2, 3, 4]))
 
 # The id() function in Python is a built-in function that accepts a single argument, an object,
 # and returns its unique identity (an integer) which represents the object's memory address.
-id([2,3,4])       # 4299607744
-id(set([2,3,4]))  # 4299630176
+id([2, 3, 4])       # 4299607744
+id(set([2 ,3, 4]))  # 4299630176
+
+
+################### SORTING OBJECTS EXAMPLE ###################
+# 0. Student class with two attributes: name, gpa
+class Student(object):
+    def __init__(self, name: str, gpa: float):
+        self.name = name
+        self.gpa = gpa
+
+    # __lt__() (less than) method used for default compare / sort operations
+    def __lt__(self, other):
+        return self.name < other.name
+
+    # Helper method to serialized Student objects when printing results
+    def __str__(self):
+        return f'{self.name}: {self.gpa}.'
+
+# 0.1) Instantiate an array of Students
+students = [
+    Student('A', 4.0),
+    Student('B', 3.0),
+    Student('C', 2.0),
+    Student('D', 3.2),
+]
+
+# 1) Uses __lt__ method for defining sort function. 
+# Sort according to the __lt__ defined in Student class.
+# This is not an in-place sort, students array remains unchanged.
+students_sorted_by_name = sorted(students)
+print(*students)
+# A: 4.0. B: 3.0. C: 2.0. D: 3.2.
+print(*students_sorted_by_name)
+# A: 4.0. B: 3.0. C: 2.0. D: 3.2.
+
+# 2) Uses lambda sorting function in-place sort.
+# Sort students in-place by gpa (in default order, increasing order)
+students.sort(key=lambda student: student.gpa)
+print(*students)
+# C: 2.0. B: 3.0. D: 3.2. A: 4.0.
+# Sort students in-place by gpa (in reverse order, decreasing order)
+students.sort(key=lambda student: student.gpa, reverse=True)
+print(*students)
+# A: 4.0. D: 3.2. B: 3.0. C: 2.0.
+
+# Return characters of a string
+text = "string"
+list(text)
+# ['s', 't', 'r', 'i', 'n', 'g']
+
+# Sort a text's tokens in increasing order of frequency
+import collections
+text = "a b d c b c b e"
+tokens = text.split(" ")
+counter = collections.Counter(tokens)
+counter
+# Counter({'b': 3, 'c': 2, 'a': 1, 'd': 1, 'e': 1}) # Sorted in decreasing order of frequency, by default
+token_frequencies_sorted = sorted(counter.items(), key=lambda x: x[1], reverse=False)
+token_frequencies_sorted
+# [('a', 1), ('d', 1), ('e', 1), ('c', 2), ('b', 3)]
