@@ -11,12 +11,46 @@ class TreeNode:
         self.left = None
         self.right = None
 
+import collections
+
+# Time: O(n)
+# Space: O(h)
 class Solution:
+    # EPI solution
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        Status = collections.namedtuple('Status', ('num_nodes', 'ancestor'))
+
+        def lca_helper(tree, node0, node1):
+            if not tree:
+                return Status(0, None)
+
+            # Left subtree
+            left_result = lca_helper(tree.left, node0, node1)
+            # If both nodes found in left subtree, return
+            if left_result.num_nodes == 2:
+                return left_result
+
+            # Right subtree
+            right_result = lca_helper(tree.right, node0, node1)
+            # If both nodes found in right subtree, return
+            if right_result.num_nodes == 2:
+                return right_result
+
+            num_nodes = left_result.num_nodes + \
+                        right_result.num_nodes + \
+                        int(tree is node0) + \
+                        int(tree is node1)
+            return Status(num_nodes, tree if num_nodes == 2 else None)
+
+        # Call LCA helper on root, p, q
+        return lca_helper(root, p, q).ancestor
+
+    # Leetcode solution
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         ans = 0
         def recurseTree(node: 'TreeNode') -> bool:
             nonlocal ans
-            # Reached enfd of branch, return false
+            # Reached end of branch, return false
             if not node:
                 return False
             # Left child

@@ -8,3 +8,4 @@ g++ Permutations.cpp -o Permutations
 
 # Python
 python Permutations.py
+python Permutations_better.py

@@ -36,7 +36,7 @@ class Trie:
 class Solution:
 
     """
-    Trie+ BFS: O(sum_i w_i), w_i is length of i-th word
+    Trie + BFS: O(sum_i w_i), w_i is length of i-th word
     """
     def longestWord(self, words: List[str]) -> str:
         trie = Trie()

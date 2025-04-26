@@ -39,3 +39,4 @@ if __name__ == "__main__":
     node1.addChild(Node(3, State.UNVISITED))
     print(node1)
     # Node: value = 1, state = State.UNVISITED, children = [2,3]
+

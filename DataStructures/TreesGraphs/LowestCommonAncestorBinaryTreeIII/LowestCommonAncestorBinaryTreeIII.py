@@ -22,11 +22,11 @@ class Solution:
         # self.printNodeValuesInList(qList)
 
         # 2. Depth difference: truncate longer ancestor list to length of shorter ancestor list
-        pqLenDiff = len(pList) - len(qList)
-        if pqLenDiff > 0:
-            pList = pList[pqLenDiff:]
-        elif pqLenDiff < 0:
-            qList = qList[abs(pqLenDiff):]
+        # Denote p as longer path
+        if len(qList) > len(pList):
+            pList, qList = pList, qList
+        # Trim longer list p
+        pList = pList[len(pList)-len(qList):]
 
         # 3. Compare node values(!) one-by-one from lowest level to root. When matched, LCA
         for index in range(len(pList)):

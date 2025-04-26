@@ -100,7 +100,7 @@ left = 3
 right = 5
 pivot_idx = random.randint(left, right)
 pivot_idx
-# Choose an element from a list
+# Choose an element from a list, with random.choice(list_name)
 import random
 chosen_element = random.choice([1,2,3])
 chosen_element
@@ -1017,16 +1017,15 @@ stackUsingDeque.append("b")  # push()
 stackUsingDeque.append("c")  # push()
 stackUsingDeque
 # deque(['a', 'b', 'c'])
-stackUsingDeque.popleft()  # popleft()
+stackUsingDeque.pop()  # pop() -> pop from the right, last element.
 # 'a'
 stackUsingDeque
-# deque(['b', 'c'])
+# deque(['a', 'b'])
 # Peek top element
 stackUsingDeque[-1]
-# 'c'
+# 'b'
 stackUsingDeque  # Value didn't change after peek() method call
-# deque(['b', 'c'])
-
+# deque(['a', 'b'])
 
 # QUEUE
 # Init queue with empty list
@@ -1054,10 +1053,12 @@ QueueFromEmptyList.pop()
 QueueFromEmptyList
 # deque([2])
 
-# append(): append to tail / end,
-# appendleft(): append to head / front,
-# pop(): pop from tail / end,
-# popleft(): from from head
+# Stacks: append() and pop() (append to end, pop from right (last element pushed))
+# append(): append to tail / end (stack)
+# pop(): pop from tail / end (stack)
+# Queues: append() and popleft() (append to end, pop from left (first element pushed))
+# append(): append to head / front (queue)
+# popleft(): pop from head (queue)
 QueueFromEmptyList = deque([])
 # Append adds element to tail of the queue (Similar to what happens in queue DS)
 QueueFromEmptyList.append(1)
@@ -1065,12 +1066,9 @@ QueueFromEmptyList.append(2)
 QueueFromEmptyList.append(3)
 QueueFromEmptyList
 # deque([1, 2, 3])
-QueueFromEmptyList.appendleft(4)
-QueueFromEmptyList
-# deque([4, 1, 2, 3])
 QueueFromEmptyList.popleft()
 QueueFromEmptyList
-# deque([1, 2, 3])
+# deque([2, 3])
 
 
 # Dictionary initialization
@@ -1454,3 +1452,664 @@ counter
 token_frequencies_sorted = sorted(counter.items(), key=lambda x: x[1], reverse=False)
 token_frequencies_sorted
 # [('a', 1), ('d', 1), ('e', 1), ('c', 2), ('b', 3)]
+
+# TODO: UNIT TESTING / INTEGRATION TESTING IN PYTHON
+
+# Get num rows and columns of a matrix
+num_rows, num_cols = 5, 10
+matrix = [[0] * num_cols for i in range(num_rows)]
+rows, cols = len(matrix), len(matrix[0])
+rows, cols
+# (5, 10)
+rows == num_rows, cols == num_cols
+# (True, True)
+
+# Python nonlocal keyword: https://www.w3schools.com/python/ref_keyword_nonlocal.asp
+# The nonlocal keyword in Python is used to declare that a variable inside a nested
+# function is not local to that function. It allows inner functions to modify variables
+# defined in their enclosing functions (excluding the global scope).
+
+def outer_function():
+    x = "local"
+
+    def inner_function():
+        nonlocal x
+        x = "nonlocal"
+        print("inner:", x)
+
+    inner_function()
+    print("outer:", x)
+
+outer_function()
+# inner: nonlocal
+# outer: nonlocal
+
+# TODO: Python lambda
+# lambda arguments : expression
+# The expression is executed and the result is returned.
+x = lambda a : a + 10
+x(5)
+# 15
+x = lambda a, b : a * b
+x(5, 6)
+# 30
+# lambda as anonymous function inside another function
+def myfunc(n):
+  return lambda a : a * n
+mydoubler = myfunc(2)
+mydoubler(11)
+# 22
+
+#TODO: @#lru_cache annotation ? Example: https://applyingml.com/resources/patterns/
+
+#TODO: Deep vs. shallow copy in python
+import copy
+original_list = [1, 2, [3, 4]]
+
+# Shallow copy
+shallow_copied_list = original_list.copy()
+
+# Deep copy
+deep_copied_list = copy.deepcopy(original_list)
+
+# Modify the shallow copy
+shallow_copied_list[2][0] = 5
+
+print(f"Original list: {original_list}")
+# Output: Original list: [1, 2, [5, 4]]
+print(f"Shallow copied list: {shallow_copied_list}")
+# Output: Shallow copied list: [1, 2, [5, 4]]
+print(f"Deep copied list: {deep_copied_list}")
+# Output: Deep copied list: [1, 2, [3, 4]]
+
+# Modify the deep copy
+deep_copied_list[2][1] = 6
+
+print(f"Original list: {original_list}")
+# Output: Original list: [1, 2, [5, 4]]
+print(f"Shallow copied list: {shallow_copied_list}")
+# Output: Shallow copied list: [1, 2, [5, 4]]
+print(f"Deep copied list: {deep_copied_list}")
+# Output: Deep copied list: [1, 2, [3, 6]
+
+# String duplication with *
+line = ["a", "b", "c"]
+" ".join(line) + "e" * 10
+# 'a b ceeeeeeeeee'
+
+# SET DIFFERENCE
+set1 = {1, 2, 3, 4, 5}
+set2 = {3, 4, 6, 7}
+
+# Using the difference() method
+diff_set1 = set1.difference(set2)
+print(diff_set1)  # Output: {1, 2, 5}
+
+diff_set2 = set2.difference(set1)
+print(diff_set2)  # Output: {6, 7}
+
+# Using the - operator
+diff_set3 = set1 - set2
+print(diff_set3)  # Output: {1, 2, 5}
+
+diff_set4 = set2 - set1
+print(diff_set4)  # Output: {6, 7}
+
+
+# TODO: __repr__ method: https://stackoverflow.com/questions/12933964/printing-a-list-of-objects-of-user-defined-class
+# Motivation: __str__ is used for human-readable representation,
+# while __repr__ is used for unambiguous representation.
+# __str__ isn't enough when printing list of objects, when object has __str__ method, but no __repr__ method
+# Example:
+class LogEntry:
+    def __init__(self, job_id: int, is_start: bool, timestamp: int):
+        self.job_id = job_id
+        self.is_start = is_start
+        self.timestamp = timestamp
+
+    def __str__(self):
+        return f"LogEntry({self.job_id}, {self.is_start}, {self.timestamp})"
+
+    def __repr__(self):
+        return str(self)
+
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        stack: List[LogEntry] = []  # deque([])
+        times = [0] * n
+        prev_timestamp = -1
+
+        for log in logs:
+            log_split = log.split(":")
+            if len(log_split) != 3:
+                continue
+            job_id = int(log_split[0])
+            is_start = (log_split[1] == 'start')
+            timestamp = int(log_split[2])
+
+            if is_start:
+                if stack:
+                    prev_job = stack[-1]
+                    times[prev_job.job_id] += timestamp - prev_timestamp
+                print(f"Inside is_start: stack before append(): {str(stack)}")
+                stack.append(LogEntry(job_id, is_start, timestamp))
+                print(f"Inside is_start: stack after append(): {str(stack)}")
+                prev_timestamp = timestamp
+            else:
+                prev_job = stack[-1]
+                times[prev_job.job_id] = timestamp - prev_timestamp + 1
+                print(f"Inside is_start: stack before pop(): {str(stack)}")
+                stack.pop()
+                print(f"Inside is_start: stack after pop(): {str(stack)}")
+                prev_timestamp = timestamp + 1  # IMPORTANT: End of job includes the last timestamp
+
+        return times
+
+
+# zip() method can take more than 2 arguments
+a = [1,2,3]
+list(zip(a,a))
+# [(1, 1), (2, 2), (3, 3)]
+list(zip(a,a,a))
+# [(1, 1, 1), (2, 2, 2), (3, 3, 3)]
+
+
+# Integer value of boolean values
+int(True)
+# 1
+int(False)
+# 0
+
+# Easy class creation using collections.namedtuple
+import collections
+Status = collections.namedtuple('Status', ['num_target_nodes', 'ancestor'])
+status_instance = Status(1, 2)
+print(status_instance)
+# Status(num_target_nodes=1, ancestor=2)
+print(status_instance.num_target_nodes, status_instance.ancestor)
+# 1 2
+
+
+# IMPORTANT: Common hack: when comparing two values, if operating on any is symmetric,
+# denote one as max / min, and swap values otherwise, and operate on the denoted value.
+# Example from EPI-Python 9.4 (Compute LCA when nodes have parent pointer)
+# Make node_0 as the deeper node in order to simplify the code
+node_0, node_1 = TreeNode(5), TreeNode(3)
+node_0_depth, node_1_depth = 2, 3
+if node_0_depth < node_1_depth:
+    node_0, node_1 = node_1, node_0
+
+
+# Object equality check: Primitive types
+# 1. == Operator checks VALUE equality
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a == b)
+# Output: True (same content)
+print(a == c)
+# Output: True (same content)
+# 2. is Operator checks REFERENCE equality
+# This operator checks if two variables refer to the same object in memory.
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a is b)
+# Output: False (different objects, even with same content)
+print(a is c)
+# Output: True (same object)
+
+
+# Object equality check: Objects
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+# 1. == Operator checks VALUE equality
+node_0 = Node(0)
+node_1 = Node(0)
+node_2 = node_0
+print(node_0 == node_1)
+# Output: False (different objects, even with same content)
+print(node_0 == node_2)
+# Output: True (same objects, pointing to same memory location)
+
+# 2. is Operator checks REFERENCE equality
+# This operator checks if two variables refer to the same object in memory.
+node_0 = Node(0)
+node_1 = Node(0)
+node_2 = node_0
+print(node_0 is node_1)
+# Output: False (different objects, even with same content)
+print(node_0 is node_2)
+# Output: True (same objects, pointing to same memory location)
+
+# Caveat to 1. == Operator checks VALUE equality:
+# If we override the __eq__ method in the Node class, then == operator will check for value equality
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+    def __eq__(self, other):
+        return self.data == other.data
+
+node_0 = Node(0)
+node_1 = Node(0)
+node_2 = node_0
+print(node_0 == node_1)
+# Output: True (different objects / memory locations, but == calls __eq__ method,
+# which checks if nodes have the same content, which is true)
+print(node_0 == node_2)
+# Output: True (same objects, pointing to same memory location)
+
+
+# next() can be used to iterate on any iterable (in addition to generators)
+# Example from https://www.w3schools.com/python/ref_func_next.asp
+mylist = iter(["apple", "banana", "cherry"])
+x = next(mylist, "orange")
+print(x)
+# apple
+x = next(mylist, "orange")
+print(x)
+# banana
+x = next(mylist, "orange")
+print(x)
+# cherry
+x = next(mylist, "orange")
+print(x)
+# orange
+
+# Set intersection and union
+# 1. intersection
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+# Using intersection() method
+intersection_set = set1.intersection(set2)
+print(intersection_set) 
+# {4, 5}
+
+# Using & operator
+intersection_set = set1 & set2
+print(intersection_set)
+# Output: {4, 5}
+
+# 2. Union
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+# Using union() method
+union_set = set1.union(set2)
+print(union_set)
+# Output: {1, 2, 3, 4, 5}
+
+# Using | operator
+union_set = set1 | set2
+print(union_set)
+# Output: {1, 2, 3, 4, 5}
+
+# Binary search on objects / used-defined typeswith bisect() method. Example:
+from typing import Callable, Any
+import collections
+import bisect
+Student = collections.namedtuple('Student', ['name', 'gpa'])
+students = [Student('Alice', 3.7), Student('Bob', 3.5), Student('Charlie', 3.5), Student('Osman', 3.2)]
+
+# Order in decreasing order of gpa, then increasing of name
+def comp_gpa(student: Student):
+    return (-student.gpa, student.name)
+
+def search_student(students: List[Student], target, comp_gpa: Callable[[Student], Any]):
+    i = bisect.bisect_left([comp_gpa(s) for s in students], comp_gpa(target))
+    print(i)
+    return 0 <= i < len(students) and students[i] == target
+
+search_student(students, Student('Bob', 3.5), comp_gpa)
+# 1
+# True
+search_student(students, Student('Osman', 3.2), comp_gpa)
+# 3
+# True
+search_student(students, Student('Mehmet', 3.1), comp_gpa)
+# 4
+# False
+search_student(students, Student('Mehmet', 4.0), comp_gpa)
+# 0
+# False
+
+
+# Mixed typing in Python
+# Method 1: Using Union:
+from typing import Union
+
+def process_data(data: Union[int, str, list]) -> None:
+    if isinstance(data, int):
+        print("Processing integer:", data)
+    elif isinstance(data, str):
+        print("Processing string:", data)
+    elif isinstance(data, list):
+        print("Processing list:", data)
+    else:
+        print("Unsupported data type")
+
+process_data(10)
+# Processing integer: 10
+process_data("hello")
+# Processing string: hello
+process_data([1, 2, 3])
+# Processing list: [1, 2, 3]
+
+# Method 2: Using | (for Python version >= 3.10)
+def process_data(data: int | str | list) -> None:
+    if isinstance(data, int):
+        print("Processing integer:", data)
+    elif isinstance(data, str):
+        print("Processing string:", data)
+    elif isinstance(data, list):
+        print("Processing list:", data)
+    else:
+        print("Unsupported data type")
+
+process_data(10)
+# Processing integer: 10
+process_data("hello")
+# Processing string: hello
+process_data([1, 2, 3])
+# Processing list: [1, 2, 3]
+
+# Method 3: Type-hinting in mixed-type containers using Union or |
+from typing import List, Union
+
+mixed_list: List[Union[int, str]] = [1, "apple", 2, "banana"]
+print(mixed_list)
+# [1, 'apple', 2, 'banana']
+#In Python 3.10+
+mixed_list_2: List[int | str] = [1, "apple", 2, "banana"]
+print(mixed_list_2)
+# [1, 'apple', 2, 'banana']
+
+
+# Checking directional comparison easily
+# Decide if num / denom is negative or positive
+numerator = -1
+denominator = 1
+fraction = []
+if (numerator < 0) != (denominator < 0):
+    fraction.append("-")
+
+
+# Python unit testing
+import unittest
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
+if __name__ == '__main__':
+    unittest.main()
+
+# Ran 3 tests in 0.005s
+# OK
+
+class ExpectedFailureTestCase(unittest.TestCase):
+    @unittest.expectedFailure
+    def test_fail(self):
+        self.assertEqual(1, 0, "broken")
+
+if __name__ == '__main__':
+    unittest.main()
+
+# Ran 1 test in 0.000s
+# OK (expected failures=1)
+
+import unittest
+
+# Module to be tested
+def add(x, y):
+    return x + y
+
+# Test class
+class TestAdd(unittest.TestCase):
+    def test_add_positive_numbers(self):
+        self.assertEqual(add(2, 3), 5)
+
+    def test_add_negative_numbers(self):
+        self.assertEqual(add(-1, -1), -2)
+
+    def test_add_mixed_numbers(self):
+        self.assertEqual(add(5, -2), 3)
+
+# Run the tests
+if __name__ == '__main__':
+    unittest.main()
+
+# Ran 3 tests in 0.000s
+# OK
+
+# Python Unit tests: Class and Module Fixtures
+# 1) setUpClass and tearDownClass: These must be implemented as class methods.
+import unittest
+
+def createExpensiveConnectionObject():
+    pass
+
+class Test(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._connection = createExpensiveConnectionObject()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._connection.destroy()
+
+# 2. setUpModule and tearDownModule: These should be implemented as functions
+
+def createConnection():
+    pass
+
+def closeConnection():
+    pass
+
+def setUpModule():
+    createConnection()
+
+def tearDownModule():
+    closeConnection()
+
+# AssertRaises
+import unittest
+
+class TestIterator(unittest.TestCase):
+    def test_stop_iteration(self):
+        my_iterator = iter([])  # An empty iterator
+
+        with self.assertRaises(StopIteration):
+            next(my_iterator)
+
+
+# TODO: String operations / methods. E.g. find / insert methods.
+
+# Sort by multiple criteria
+sentences = {
+    "a": 1,
+    "b": 2,
+    "cc": 4,
+    "cd": 4,
+    "d": 5,
+}
+sorted_sentences = sorted(sentences.items(), key = lambda x: (-x[1], x[0]))
+sorted_sentences
+# [('d', 5), ('cc', 4), ('cd', 4), ('b', 2), ('a', 1)]
+
+# Reverse a string one liner
+text = "hello"
+reversed_string = text[::-1]
+reversed_string
+# 'olleh'
+
+# Python String methods: From https://www.w3schools.com/python/python_ref_string.asp
+'''
+capitalize()	Converts the first character to upper case
+casefold()	Converts string into lower case
+center()	Returns a centered string
+count()	Returns the number of times a specified value occurs in a string
+encode()	Returns an encoded version of the string
+endswith()	Returns true if the string ends with the specified value
+expandtabs()	Sets the tab size of the string
+find()	Searches the string for a specified value and returns the position of where it was found
+format()	Formats specified values in a string
+format_map()	Formats specified values in a string
+index()	Searches the string for a specified value and returns the position of where it was found
+isalnum()	Returns True if all characters in the string are alphanumeric
+isalpha()	Returns True if all characters in the string are in the alphabet
+isascii()	Returns True if all characters in the string are ascii characters
+isdecimal()	Returns True if all characters in the string are decimals
+isdigit()	Returns True if all characters in the string are digits
+isidentifier()	Returns True if the string is an identifier
+islower()	Returns True if all characters in the string are lower case
+isnumeric()	Returns True if all characters in the string are numeric
+isprintable()	Returns True if all characters in the string are printable
+isspace()	Returns True if all characters in the string are whitespaces
+istitle()	Returns True if the string follows the rules of a title
+isupper()	Returns True if all characters in the string are upper case
+join()	Converts the elements of an iterable into a string
+ljust()	Returns a left justified version of the string
+lower()	Converts a string into lower case
+lstrip()	Returns a left trim version of the string
+maketrans()	Returns a translation table to be used in translations
+partition()	Returns a tuple where the string is parted into three parts
+replace()	Returns a string where a specified value is replaced with a specified value
+rfind()	Searches the string for a specified value and returns the last position of where it was found
+rindex()	Searches the string for a specified value and returns the last position of where it was found
+rjust()	Returns a right justified version of the string
+rpartition()	Returns a tuple where the string is parted into three parts
+rsplit()	Splits the string at the specified separator, and returns a list
+rstrip()	Returns a right trim version of the string
+split()	Splits the string at the specified separator, and returns a list
+splitlines()	Splits the string at line breaks and returns a list
+startswith()	Returns true if the string starts with the specified value
+strip()	Returns a trimmed version of the string
+swapcase()	Swaps cases, lower case becomes upper case and vice versa
+title()	Converts the first character of each word to upper case
+translate()	Returns a translated string
+upper()	Converts a string into upper case
+zfill()	Fills the string with a specified number of 0 values at the beginning
+'''
+
+text1 = "aabcde"
+text2 = "bc"
+
+text1.find(text2)
+# 2
+text1.index(text2)
+# 2
+
+
+
+"1abc3de5".isalnum()  # Returns True if all characters in the string are alphanumeric
+# True
+"abcde".isalpha()  # Returns True if all characters in the string are in the alphabet
+# True
+"abcde123".isascii()  # Returns True if all characters in the string are ascii characters
+# True
+"2345".isdecimal()	# Returns True if all characters in the string are decimals (0-9)
+# True
+"123".isdigit()	 # Returns True if all characters in the string are digits
+# True
+"abcde".islower()	# Returns True if all characters in the string are lower case
+# True
+"123".isnumeric()	# Returns True if all characters in the string are numeric
+# True
+"    ".isspace()	# Returns True if all characters in the string are whitespaces
+# True
+"ABC".isupper()	 # Returns True if all characters in the string are upper case
+
+
+# Numbers from 0 to n-1, in reverse
+n = 10
+print(list(range(n-1,-1,-1)))
+# [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+# pairwise() iteration in Python
+# Pairwise iteration in Python involves processing elements of an iterable in pairs.
+# The itertools module provides an efficient way to achieve this using the pairwise function,
+# introduced in Python 3.10.
+from itertools import pairwise
+
+my_list = [1, 2, 3, 4, 5]
+
+for a, b in pairwise(my_list):
+    print(a, b)
+# Output:
+# 1 2
+# 2 3
+# 3 4
+# 4 5
+
+# Key methods in "random" library
+
+import random
+
+help(random.randrange)
+'''
+randrange(start, stop=None, step=1) method of random.Random instance
+    Choose a random item from range(start, stop[, step]).
+    
+    This fixes the problem with randint() which includes the
+    endpoint; in Python this is usually not what you want.
+'''
+random.randrange(28)
+# 11
+
+help(random.randint)
+'''
+randint(a, b) method of random.Random instance
+    Return random integer in range [a, b], including both end points.
+'''
+random.randint(8, 16)
+# 16
+
+help(random.random)
+'''
+random() method of random.Random instance
+    random() -> x in the interval [0, 1).
+'''
+random.random()
+# 0.6271493401650339
+
+help(random.shuffle)
+'''
+shuffle(x, random=None) method of random.Random instance
+    Shuffle list x in place, and return None.
+    
+    Optional argument random is a 0-argument function returning a
+    random float in [0.0, 1.0); if it is the default None, the
+    standard random.random will be used.
+'''
+A = list(range(10))
+random.shuffle(A)
+A
+# [5, 0, 8, 9, 3, 7, 4, 1, 6, 2]
+
+help(random.choice)
+'''
+choice(seq) method of random.Random instance
+    Choose a random element from a non-empty sequence.
+'''
+A = list(range(10))
+random.choice(A)
+# 5

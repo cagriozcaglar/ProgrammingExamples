@@ -1,7 +1,66 @@
-# 787. Cheapest Flights Within K Stops
+'''
+Leetcodd 787: Cheapest Flights Within K Stops
+
+There are n cities connected by some number of flights. You are given an array flights where flights[i] = [fromi, toi, pricei] indicates that there is a flight from city fromi to city toi with cost pricei.
+You are also given three integers src, dst, and k, return the cheapest price from src to dst with at most k stops. If there is no such route, return -1.
+
+Example 1:
+Input: n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1
+Output: 200
+Explanation: The graph is shown.
+
+Example 2:
+Input: n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 0
+Output: 500
+Explanation: The graph is shown.
+'''
+# Solution from https://guides.codepath.org/compsci/Cheapest-Flights-Within-K-Stops
+# Uses Dijkstra's shortest-path algorithm
 import heapq
+from typing import List, Tuple
+import math
+
 class Solution:
-    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+    def findCheapestPrice1(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        # Initialize graph adj_list
+        graph = [[] for _ in range(n)]
+        # Populate graph: src -> [(dest, weight),...]
+        for u, v, w in flights:
+            graph[u].append((v, w))
+
+        # Return min distance within k stops
+        return self.dijkstra(graph, src, dst, k)
+
+    def dijkstra(
+        self,
+        graph: List[List[Tuple[int, int]]],
+        src: int,
+        dst: int,
+        k: int
+    ) -> int:
+        dist = [[math.inf] * (k + 2) for _ in range(len(graph))]
+        dist[src][k + 1] = 0
+
+        # Min heap has (d, u, stops)
+        min_heap = [(dist[src][k + 1], src, k + 1)]
+
+        while min_heap:
+            d, u, stops = heapq.heappop(min_heap)
+            # Destination found, return distance d
+            if u == dst:
+                return d
+            # If k stops reached, continue
+            if stops == 0 or d > dist[u][stops]:
+                continue
+            # Check neighbours
+            for v, w in graph[u]:
+                if d + w < dist[v][stops - 1]:
+                    dist[v][stops - 1] = d + w
+                    heapq.heappush(min_heap, (dist[v][stops - 1], v, stops - 1))
+
+        return -1
+
+    def findCheapestPrice2(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         # Build adj matrix
         adj_matrix = [[0 for _ in range(n)] for _ in range(n)]
         for sr, dest, distance in flights:

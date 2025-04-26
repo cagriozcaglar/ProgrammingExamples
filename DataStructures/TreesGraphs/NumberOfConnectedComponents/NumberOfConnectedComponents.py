@@ -4,6 +4,9 @@ You have a graph of n nodes. You are given an integer n and an array edges where
 there is an edge between ai and bi in the graph.
 Return the number of connected components in the graph.
 """
+from collections import defaultdict
+from typing import List
+
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         def dfs(node, adj, visited):
