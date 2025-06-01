@@ -36,8 +36,6 @@ class Solution:
         for dest, src in prerequisites:
             adj_list[src].append(dest)
 
-        print(f'adj_list: {adj_list}')
-
         topsort_order = []
         is_possible = True
 

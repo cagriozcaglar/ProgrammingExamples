@@ -14,16 +14,66 @@ Input: transactions = [[0,1,10],[1,0,1],[1,2,5],[2,0,5]]
 Output: 1
 '''
 
-import collections
+'''
+The intuition behind the solution is to first simplify the problem by calculating the net balance of each person after all the transactions. A net balance is the amount of money a person owes (negative balance) or is owed (positive balance). If a person has a net balance of zero, no further action is needed for them, so we ignore them in the settlement process.
+
+To settle the debts, we aim to find the fewest number of transactions that would balance these net amounts. This becomes a combinatorial optimization problem where we explore different ways to match debtors (people with a negative balance) with creditors (people with a positive balance) in a minimal fashion. Essentially, it's a variation of the subset sum problem, which is computationally challenging (NP-Complete) due to the number of combinations to consider.
+
+We use dynamic programming to manage the complexity. We represent each subset of people using a bitmask, where the i-th bit represents whether the i-th person is included in the subset. Our dynamic programming array f keeps track of the minimum number of transactions needed for each subset of people. The value f[i] contains the optimal (minimum) number of transactions needed to settle the debts among the subset of people represented by the bitmask i.
+
+By iterating through all possible subsets, we try to construct solutions from combinations of smaller subsets that sum up to zero, meaning their debts can be settled among themselves. We use bit manipulation to iterate through subsets and to compute the number of bits set (number of people involved) in a state. The bit count of a state minus one gives us the correct number of transactions, assuming a direct transaction could settle the debts among people in that state.
+
+The final answer is then found in f[-1], which represents the minimum number of transactions needed to settle all debts among all people, encoded in the bitmask with all bits set.
+'''
+
+from collections import defaultdict
 import math
 from typing import List
 
 class Solution:
+    def min_transfers(self, transactions) -> int:
+        balance = defaultdict(int)
+        # Calculate the net balance for each person
+        for from_person, to_person, amount in transactions:
+            balance[from_person] -= amount
+            balance[to_person] += amount
+      
+        # Filter out people with a zero balance as they do not need any transfers
+        debts = [amount for amount in balance.values() if amount]
+        number_of_people = len(debts)
+      
+        # Initialize the dp array to store minimum transfers for each subset
+        # set fewest_transfers[i] = inf for all i, except fewest_transfers[0] = 0
+        fewest_transfers = [inf] * (1 << number_of_people)
+        fewest_transfers[0] = 0
+      
+        # Evaluate each subset of people
+        for i in range(1, 1 << number_of_people):
+            sum_of_debts = 0
+            # Calculate the sum of debts for the current subset
+            for j, debt in enumerate(debts):
+                if i >> j & 1:
+                    sum_of_debts += debt
+          
+            # If the sum of debts is zero, it's possible to settle within the group
+            if sum_of_debts == 0:
+                # The number of transactions needed is the bit count of i (number of set bits) minus 1
+                fewest_transfers[i] = bin(i).count('1') - 1
+              
+                # Try to split the subset in different ways and keep the minimum transfers
+                subset = (i - 1) & i
+                while subset > 0:
+                    fewest_transfers[i] = min(fewest_transfers[i], fewest_transfers[subset] + fewest_transfers[i ^ subset])
+                    subset = (subset - 1) & i
+      
+        # The answer is in fewest_transfers[-1] which corresponds to the situation where all people are considered
+        return fewest_transfers[-1]
+
     # Dynamic Programing
     # Time complexity: O(n * 2^n)
     # Space complexity: O(2^n)
     def minTransfersDynamicProgramming(self, transactions: List[List[int]]) -> int:
-        balance_map = collections.defaultdict(int)
+        balance_map = defaultdict(int)
         for a, b, amount in transactions:
             balance_map[a] += amount
             balance_map[b] -= amount
@@ -56,7 +106,7 @@ class Solution:
     # Time complexity: O((n−1)!)
     # Space complexity: O(n)
     def minTransfersBacktracking(self, transactions: List[List[int]]) -> int:
-        balance_map = collections.defaultdict(int)
+        balance_map = defaultdict(int)
         for a, b, amount in transactions:
             balance_map[a] += amount
             balance_map[b] -= amount

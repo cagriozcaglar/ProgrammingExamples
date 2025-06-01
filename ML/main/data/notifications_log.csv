@@ -1,0 +1,5 @@
+user_id,notification_type,hour_of_day,device_type,location,engaged
+1,promo,10,android,NY,1
+2,reminder,15,ios,CA,0
+3,birthday_reminder,18,ios,IL,1
+4,promo,10,android,MA,0

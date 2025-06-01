@@ -1026,6 +1026,11 @@ stackUsingDeque[-1]
 # 'b'
 stackUsingDeque  # Value didn't change after peek() method call
 # deque(['a', 'b'])
+# Append multiple elements from a list at the beginning of the queue, using extendleft() method
+stackUsingDeque.extendleft(["1", "2", "3"])  # extendleft()
+stackUsingDeque
+# deque(['3', '2', '1', 'a', 'b'])
+# NOTE: Above, elements are inserted in reverse order with extendleft() method.
 
 # QUEUE
 # Init queue with empty list
@@ -2113,3 +2118,8 @@ choice(seq) method of random.Random instance
 A = list(range(10))
 random.choice(A)
 # 5
+
+
+# Evaluate a python statement using eval() method
+eval('3*5')
+# 15

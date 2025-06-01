@@ -13,10 +13,11 @@ If there are multiple such values, it returns the value associated with the larg
 If there are no values, it returns "".
 '''
 
-from typing import Dict
+from typing import Dict, List, Tuple
 from collections import defaultdict
 from sortedcontainers import SortedDict
 
+# Using SortedDict
 class TimeMap:
 
     def __init__(self):
@@ -43,3 +44,31 @@ class TimeMap:
         # Return the value stored in previous position of current iterator
         # which returns the greatest timestamp smaller than timestamp variable
         return self.key_time_map[key].peekitem(iterator - 1)[1]
+
+# Using Binary Search
+class TimeMap2:
+
+    def __init__(self):
+        self.key_time_map: Dict[str, List[Tuple[int, str]]] = defaultdict(list)
+        
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        self.key_time_map[key].append((timestamp, value))
+
+    # Get using Binary search
+    def get(self, key: str, timestamp: int) -> str:
+        if key not in self.key_time_map:
+            return ""
+                                
+        if timestamp < self.key_time_map[key][0][0]:
+            return ""
+                                
+        left, right = 0, len(self.key_time_map[key])
+                                
+        while left < right:
+            mid = (left + right) // 2
+            if self.key_time_map[key][mid][0] <= timestamp:
+                left = mid + 1
+            else:
+                right = mid
+                            
+        return "" if right == 0 else self.key_time_map[key][right-1][1]

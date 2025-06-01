@@ -78,5 +78,5 @@ Somehow fails some test cases
 #                 # Update the sign to the current operator.
 #                 sign = ch
 #                 cur_num = 0
-
+#
 #         return sum(stack)

@@ -36,7 +36,7 @@ class NestedInteger:
        Return None if this NestedInteger holds a nested list
        """
 
-   def getList(self) -> List[NestedInteger]:
+   def getList(self) -> List['NestedInteger']:
        """
        @return the nested list that this NestedInteger holds, if it holds a nested list
        Return None if this NestedInteger holds a single integer
@@ -55,7 +55,6 @@ class NestedIterator:
         # All values are placed here before returned
         self.peeked = None
 
-
     def int_generator(self, nested_list: List[NestedInteger]):
         for nested in nested_list:
             if nested.isInteger():
@@ -63,14 +62,12 @@ class NestedIterator:
             else:
                 yield from self.int_generator(nested.getList())
 
-
     def next(self) -> int:
         if not self.hasNext():
             return None
         # Return the value of self.peeked, also clear it
         next_integer, self.peeked = self.peeked, None
         return next_integer
-
 
     def hasNext(self) -> bool:
         if self.peeked is not None:
@@ -100,11 +97,9 @@ class NestedIterator1:
         self.position = -1  # Pointer to previous returned
         flatten_list(nestedList)
 
-
     def next(self) -> int:
         self.position += 1
         return self.values[self.position]
-
 
     def hasNext(self) -> bool:
         return self.position + 1 < len(self.values)

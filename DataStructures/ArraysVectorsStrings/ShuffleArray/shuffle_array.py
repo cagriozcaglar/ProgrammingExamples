@@ -32,31 +32,3 @@ class Solution:
             index = random.choice(list(range(i, length)))
             self.array[i], self.array[index] = self.array[index], self.array[i]
         return self.array
-
-
-# class Solution:
-
-#     def __init__(self, nums: List[int]):
-#         self.original_list = list(nums)
-#         self.list_to_modify = nums
-
-#     def reset(self) -> List[int]:
-#         self.list_to_modify = self.original_list
-#         self.original_list = list(self.original_list)
-#         return self.list_to_modify
-
-#     def shuffle(self) -> List[int]:
-#         length = len(self.list_to_modify)
-#         for i in range(length):
-#             candidate_indices = list(range(i, length))
-#             if candidate_indices:
-#                 index = random.choice(candidate_indices)
-#                 self.list_to_modify[i], self.list_to_modify[index] = self.list_to_modify[index], self.list_to_modify[i]
-#         return self.list_to_modify
-
-
-
-# Your Solution object will be instantiated and called as such:
-# obj = Solution(nums)
-# param_1 = obj.reset()
-# param_2 = obj.shuffle()
